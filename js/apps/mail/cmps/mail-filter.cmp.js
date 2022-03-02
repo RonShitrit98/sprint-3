@@ -6,7 +6,7 @@ export default {
             <button @click="newEmail">New Email</button>
             <div class="filter-list">
                 <ul>
-                    <li>Inbox({{unreadEmails}})</li>
+                    <li @click="setFilter('inbox')">Inbox({{unreadEmails}})</li>
                     <li @click="setFilter('sent')">sent({{unopendSentEmails}})</li>
                 </ul>
             </div>

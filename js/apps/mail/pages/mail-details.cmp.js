@@ -14,8 +14,6 @@ export default {
       }
     },
   created() {
-    console.log(this.$route.params.mailId)
-    console.log(this.$route.params.filterBy)
     const id = this.$route.params.mailId
     mailService.get(id)
       .then(email => {
