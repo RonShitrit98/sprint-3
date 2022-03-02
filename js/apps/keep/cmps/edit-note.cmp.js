@@ -1,13 +1,13 @@
 
 export default {
     props: ['note'],
-    emits: ['close'],
+    emits: ['close', 'color'],
     template: `
     <section :class="[note.style, 'edit-note']">
-            <h1>Edit</h1>
-            <h2>{{note.info.txt}}</h2>
-            <input type="text" placeholder="title">
-            <input type="text" placeholder="note">
+
+        <input type="text" placeholder="title" v-model="title">
+
+            <input type="text" placeholder="note" v-model="txt">
 
         <button @click="close">Close</button>
         
@@ -23,8 +23,8 @@ export default {
     `,
     data() {
         return {
-            title: null,
-            txt: null,
+            title: this.note.info.title,
+            txt: this.note.info.txt,
             bgColor: null,
             colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
                 'green', 'yellow', 'orange', 'red', 'none'],
@@ -33,13 +33,17 @@ export default {
     },
     methods: {
         close() {
-            this.$emit('close')
+            this.note.info.title = this.title
+            this.note.info.txt = this.txt
+
+            this.$emit('close', { ...this.note })
         },
-        onSetColor(color){
+        onSetColor(color) {
+            console.log('color');
             this.note.style = color;
+            this.$emit('color', { ...this.note })
         }
     },
     computed: {
-
     }
 }

@@ -7,11 +7,16 @@ _creatNotes()
 export const noteService = {
     query,
     deleteNote,
+    updateNote,
 
 }
 
-function deleteNote(noteId){
-    return storageService.remove(NOTES_KEY, noteId); 
+function updateNote(note) {
+    return storageService.put(NOTES_KEY, note)
+}
+
+function deleteNote(noteId) {
+    return storageService.remove(NOTES_KEY, noteId);
 }
 
 function query() {
@@ -20,15 +25,15 @@ function query() {
 
 function _creatNotes() {
     let notes = utilService.loadFromStorage(NOTES_KEY);
-    if (!notes || notes.cmps.length < 1) {
-        notes = {
-            title: 'Notes',
-            cmps: [
+    if (!notes || notes.length < 1) {
+        notes =
+            [
                 {
                     id: 'n101',
                     type: 'note-txt',
                     isPinned: false,
                     info: {
+                        title: 'text',
                         txt: 'Fullstack me baby!'
                     },
                     style: 'green'
@@ -40,7 +45,8 @@ function _creatNotes() {
                     isPinned: false,
                     info: {
                         url: '../img/some-img.jpg',
-                        title: 'Some image'
+                        title: 'Some image',
+                        txt:'img txt'
                     },
                     style: 'none'
                 },
@@ -64,15 +70,15 @@ function _creatNotes() {
                     info: {
                         title: 'Some video',
                         url: '',
+                        txt: 'video txt'
                     },
                     style: 'none'
                 },
-
             ]
-        };
+
         utilService.saveToStorage(NOTES_KEY, notes);
+        return notes;
     }
-    return notes;
 }
 
 

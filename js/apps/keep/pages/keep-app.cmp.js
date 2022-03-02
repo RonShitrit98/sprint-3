@@ -12,14 +12,14 @@ export default {
     <input type="text">
 
     <section class="grid main-layout" v-if="notes">
-        <div class="note" v-for="cmp in notes.cmps">
-            <component :is="cmp.type" :cmp="cmp" @delete="onDelete" 
-            @edit="onEdit" :class="cmp.style"></component>
+        <div class="note" v-for="cmp in notes">
+            <component :is="cmp.type" :cmp="cmp" :class="cmp.style" @delete="onDelete" 
+            @edit="onEdit" ></component>
         </div>
         
     </section>
 
-    <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit"/>
+    <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
 
     
         `,
@@ -50,12 +50,24 @@ export default {
                 .then(res => this.notes = res)
         },
         onEdit(id) {
-            this.selectedNote = this.notes.cmps.find(note => note.id === id);
+            this.selectedNote = this.notes.find(note => note.id === id);
             this.isEdit = true;
         },
-        closeEdit() {
+        closeEdit(note) {
+            noteService.updateNote(note)
+                .then(note => {
+                    const idx = this.notes.findIndex(currNote => currNote.id === note.id)
+                    this.notes[idx] = note
+                })
             this.isEdit = false;
             this.selectedNote = null;
+        },
+        onSetColor(note) {
+            noteService.updateNote(note)
+                .then(note => {
+                    const idx = this.notes.findIndex(currNote => currNote.id === note.id)
+                    this.notes[idx] = note
+                })
         }
     }
 
