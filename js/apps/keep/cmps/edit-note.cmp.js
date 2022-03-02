@@ -1,7 +1,7 @@
 
 export default {
     props: ['note'],
-    emits: ['close'],
+    emits: ['close', 'color'],
     template: `
     <section :class="[note.style, 'edit-note']">
             <h1>Edit</h1>
@@ -36,7 +36,9 @@ export default {
             this.$emit('close')
         },
         onSetColor(color){
+            console.log('color');
             this.note.style = color;
+            this.$emit('color', {...this.note})
         }
     },
     computed: {
