@@ -53,7 +53,12 @@ export default {
             this.selectedNote = this.notes.find(note => note.id === id);
             this.isEdit = true;
         },
-        closeEdit() {
+        closeEdit(note) {
+            noteService.updateNote(note)
+                .then(note => {
+                    const idx = this.notes.findIndex(currNote => currNote.id === note.id)
+                    this.notes[idx] = note
+                })
             this.isEdit = false;
             this.selectedNote = null;
         },

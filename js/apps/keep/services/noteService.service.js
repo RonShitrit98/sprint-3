@@ -33,6 +33,7 @@ function _creatNotes() {
                     type: 'note-txt',
                     isPinned: false,
                     info: {
+                        title: 'text',
                         txt: 'Fullstack me baby!'
                     },
                     style: 'green'
@@ -44,7 +45,8 @@ function _creatNotes() {
                     isPinned: false,
                     info: {
                         url: '../img/some-img.jpg',
-                        title: 'Some image'
+                        title: 'Some image',
+                        txt:'img txt'
                     },
                     style: 'none'
                 },
@@ -68,6 +70,7 @@ function _creatNotes() {
                     info: {
                         title: 'Some video',
                         url: '',
+                        txt: 'video txt'
                     },
                     style: 'none'
                 },
