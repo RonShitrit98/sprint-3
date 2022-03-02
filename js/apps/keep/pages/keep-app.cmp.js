@@ -5,7 +5,7 @@ import { noteService } from "../services/noteService.service.js"
 export default {
     template: `
 
-    <section class="notes" v-if="notes">
+    <section class="notes main-layout" v-if="notes">
         <h1>Notes!!!!!!!!!</h1>
         
         <div class="note" v-for="cmp in notes.cmps">
@@ -17,7 +17,6 @@ export default {
     data() {
         return {
             notes: null,
-
         }
     },
     created() {
