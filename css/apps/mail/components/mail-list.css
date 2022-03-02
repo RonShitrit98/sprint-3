@@ -1,0 +1,7 @@
+.email-unread :not(:nth-child(3n)){
+    font-weight: bold;
+}
+
+.email-read{
+    background-color: rgb(189, 189, 189);
+}
