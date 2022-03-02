@@ -1,3 +1,4 @@
+import { eventBus } from '../../../services/eventBus.service.js'
 import { mailService } from '../services/mail-service.js'
 import mailList from '../cmps/mail-list.cmp.js'
 import mailFilter from '../cmps/mail-filter.cmp.js'
@@ -19,6 +20,7 @@ export default {
         }
     },
     created(){
+        this.unsubscribe = eventBus.on('removeEmail', this.removeEmail)
         mailService.query()
         .then(emails => this.emails= emails)
     },
@@ -37,9 +39,13 @@ export default {
             this.isNewEmail = false
         },
         filter(filterBy){
-            console.log(filterBy)
             this.filterBy = filterBy
             this.$router.replace({ path: `/mail/${this.filterBy}` })
+        },
+        removeEmail(id){
+            console.log(id)
+            mailService.remove(id)
+            .then(emails => this.emails = emails)
         }
 
     },
@@ -47,5 +53,9 @@ export default {
         mailList,
         mailFilter,
         mailAdd
+    },
+    unmounted(){
+        this.unsubscribe()
     }
 }
+

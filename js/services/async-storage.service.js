@@ -48,8 +48,8 @@ function put(entityType, updatedEntity) {
 function remove(entityType, entityId) {
     return query(entityType)
         .then(entities => {
-            const idx = entities.cmps.findIndex(entity => entity.id === entityId);
-            entities.cmps.splice(idx, 1)
+            const idx = entities.findIndex(entity => entity.id === entityId);
+            entities.splice(idx, 1)
             _save(entityType, entities)
             return entities
         })

@@ -1,12 +1,14 @@
+import { eventBus } from '../../../services/eventBus.service.js'
 export default {
     props: ['email'],
     template: `
     <!-- <router-link :to="'/mail/'+email.id"> -->
-    <tr v-if="email" @click="goToEmail" :class="emailClass">
+    <tr v-if="email" @click.stop.prevent="goToEmail" :class="emailClass">
         <td>{{email.from.name}}</td>
         <td>{{email.subject}}</td>
         <td>{{emailBodyPrev}}</td>
         <td>{{emailDate}}</td>
+        <td><button @click.stop="removeEmail">X</button></td>
     </tr>
     <!-- </router-link>   -->
     `,
@@ -30,6 +32,10 @@ export default {
     methods: {
         goToEmail() {
             this.$router.push(`${this.$route.params.filterBy}/${this.email.id}`)
+        },
+        removeEmail(){
+            console.log('removing')
+            eventBus.emit('removeEmail', this.email.id)
         }
     }
 

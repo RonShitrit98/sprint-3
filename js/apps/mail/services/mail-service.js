@@ -4,7 +4,8 @@ export const mailService = {
     query,
     get,
     updateEmail,
-    newEmail
+    newEmail,
+    remove
 }
 
 const STORAGE_KEY = 'emailsDB'
@@ -20,6 +21,10 @@ function get(id) {
 
 function updateEmail(email) {
     return storageService.put(STORAGE_KEY, email)
+}
+
+function remove(id){
+    return storageService.remove(STORAGE_KEY, id)
 }
 
 function newEmail(email) {
