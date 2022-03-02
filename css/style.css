@@ -3,16 +3,16 @@
 /* SETUP */
 
 /* BASIC */
-@import '/css/basic/base.css';
-@import '/css/basic/layout.css';
+@import './basic/base.css';
+@import './basic/layout.css';
 
 /* COMPONENTS */
-@import '/css/components/app-header.css';
-@import '/css/components/app-footer.css';
+@import './components/app-header.css';
+@import './components/app-footer.css';
 
 
 /* Mail */
-@import '/css/apps/mail/components/mail-list.css';
+@import './apps/mail/components/mail-list.css';
 /* SETUP */
 
 /* BASIC */
@@ -27,9 +27,9 @@
 /* BASIC */
 
 /* COMPONENTS */
-@import '/css/apps/keep/components/keep-app.css';
-@import '/css/apps/keep/components/note-img.css';
-@import '/css/apps/keep/components/note-txt.css';
-@import '/css/apps/keep/components/note-video.css';
-@import '/css/apps/keep/components/note-todos.css';
-@import '/css/apps/keep/components/edit-note.css';
+@import './apps/keep/components/keep-app.css';
+@import './apps/keep/components/note-img.css';
+@import './apps/keep/components/note-txt.css';
+@import './apps/keep/components/note-video.css';
+@import './apps/keep/components/note-todos.css';
+@import './apps/keep/components/edit-note.css';
