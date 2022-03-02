@@ -43,7 +43,7 @@ export default {
             this.$router.replace({ path: `/mail/${this.filterBy}` })
         },
         removeEmail(id){
-            console.log(id)
+            // console.log(id)
             mailService.remove(id)
             .then(emails => this.emails = emails)
         }

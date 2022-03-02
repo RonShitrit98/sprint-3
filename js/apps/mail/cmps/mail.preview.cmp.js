@@ -34,7 +34,7 @@ export default {
             this.$router.push(`${this.$route.params.filterBy}/${this.email.id}`)
         },
         removeEmail(){
-            console.log('removing')
+            // console.log('removing')
             eventBus.emit('removeEmail', this.email.id)
         }
     }
