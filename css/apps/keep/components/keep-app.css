@@ -1,14 +1,16 @@
 .grid {
-  grid-auto-rows: max-content;
-    display: grid;
+  display: grid;
+  grid-template-columns: repeat(3,238px);
+    grid-auto-rows: 50px;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    column-gap: 5px;
-    row-gap: 5px;
-    margin: 10px 20px;
+    row-gap: 35px;
+    column-gap: 10px;
+    margin: 10px 30px;
 }
 
 .note {
   border: 1px solid black;
   padding: 15px;
+  max-width: 238px;
+  height: fit-content;
 }
