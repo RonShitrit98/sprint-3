@@ -1,4 +1,4 @@
-import { storageService } from "./async-storge-service.js";
+import { storageService } from '../../../services/async-storage.service.js';
 
 export const mailService ={
     query,
