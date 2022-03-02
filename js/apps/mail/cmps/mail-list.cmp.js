@@ -10,9 +10,7 @@ export default {
                     <th>Body</th>
                     <th>Date</th>
                 </tr>  
-          <tr v-for="email in emails" key="email.id">
-              <mail-preview :email="email"/>
-          </tr>
+              <mail-preview v-for="email in emails" key="email.id" :email="email"/>
             <!-- <li v-for="email in emails">
         
             </li> -->

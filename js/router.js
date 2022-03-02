@@ -11,10 +11,9 @@ const routes = [
     {
         path: '/mail',
         component: mailApp,
-        children: [{
-            path: ':email.id',
-            component: mailDetails
-          }]
+    },{
+        path: '/mail/:mailId',
+        component: mailDetails
     },
     {
         path: '/keep',
