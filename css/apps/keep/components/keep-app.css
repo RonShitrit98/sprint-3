@@ -1,0 +1,14 @@
+.grid {
+  grid-auto-rows: max-content;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    column-gap: 5px;
+    row-gap: 5px;
+    margin: 10px 20px;
+}
+
+.note {
+  border: 1px solid black;
+  padding: 15px;
+}

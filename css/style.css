@@ -27,3 +27,8 @@
 /* BASIC */
 
 /* COMPONENTS */
+@import '/css/apps/keep/components/keep-app.css';
+@import '/css/apps/keep/components/note-img.css';
+@import '/css/apps/keep/components/note-txt.css';
+@import '/css/apps/keep/components/note-video.css';
+@import '/css/apps/keep/components/note-todos.css';
