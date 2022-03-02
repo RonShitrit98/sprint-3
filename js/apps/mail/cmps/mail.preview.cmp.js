@@ -12,6 +12,7 @@ export default {
     `,
     computed: {
         emailBodyPrev() {
+            if(!this.email.body) return 
             return this.email.body.slice(0, 160) + '...'
         },
         emailClass() {
@@ -28,7 +29,7 @@ export default {
     },
     methods: {
         goToEmail() {
-            this.$router.push(`/mail/${this.email.id}`)
+            this.$router.push(`${this.$route.params.filterBy}/${this.email.id}`)
         }
     }
 

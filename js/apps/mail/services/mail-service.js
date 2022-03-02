@@ -1,12 +1,13 @@
 import { storageService } from '../../../services/async-storage.service.js';
 
-export const mailService ={
+export const mailService = {
     query,
     get,
-    updateEmail
+    updateEmail,
+    newEmail
 }
 
-const STORAGE_KEY ='emailsDB'
+const STORAGE_KEY = 'emailsDB'
 _createEmails()
 
 function query() {
@@ -17,18 +18,34 @@ function get(id) {
     return storageService.get(STORAGE_KEY, id);
 }
 
-function updateEmail(email){
-return storageService.put(STORAGE_KEY, email)
+function updateEmail(email) {
+    return storageService.put(STORAGE_KEY, email)
+}
+
+function newEmail(email) {
+    const newEmail = {
+        id: _makeId(),
+        subject: email.subject,
+        body: email.body,
+        isRead: false,
+        sentAt: Date.now(),
+        to: email.to,
+        from: {
+            name: 'momo',
+            address: 'momo@momo.com'
+        }
+    }
+    return storageService.post(STORAGE_KEY, newEmail)
 }
 
 function _createEmails() {
-   storageService.query(STORAGE_KEY)
-    .then(emails => {
-        if (!emails || !emails.length) {
-            emails = [{
-                id: _makeId(),
-                subject: 'Suspicious Minds',
-                body: `We're caught in a trap
+    storageService.query(STORAGE_KEY)
+        .then(emails => {
+            if (!emails || !emails.length) {
+                emails = [{
+                    id: _makeId(),
+                    subject: 'Suspicious Minds',
+                    body: `We're caught in a trap
                 I can't walk out
                 Because I love you too much, baby
                 Why can't you see
@@ -79,18 +96,18 @@ function _createEmails() {
                 I can't walk out
                 Because I love you too much, baby
                 Well, don't you know I'm caught in a trap?`,
-                isRead: false,
-                sentAt: 1551133930594,
-                to: 'momo@momo.com',
-                from: {
-                    name: 'Elvis Presley',
-                    address: 'elvis@presley.com'
-                }
-            },
-            {
-                id: _makeId(),
-                subject: 'The Whole Of The Moon',
-                body: `I pictured a rainbow
+                    isRead: false,
+                    sentAt: 1551133930594,
+                    to: 'momo@momo.com',
+                    from: {
+                        name: 'Elvis Presley',
+                        address: 'elvis@presley.com'
+                    }
+                },
+                {
+                    id: _makeId(),
+                    subject: 'The Whole Of The Moon',
+                    body: `I pictured a rainbow
                 You held it in your hands
                 I had flashes
                 But you saw the plan
@@ -155,18 +172,18 @@ function _createEmails() {
                 Too far
                 Too soon
                 You saw the whole of the moon`,
-                isRead: false,
-                sentAt: 1551133930594,
-                to: 'momo@momo.com',
-                from: {
-                    name: 'The Waterboys',
-                    address: 'TheWater@Boys.com'
-                }
-            },
-            {
-                id: _makeId(),
-                subject: 'Welcome to the Black Parade',
-                body: `When I was a young boy
+                    isRead: false,
+                    sentAt: 1551133930594,
+                    to: 'momo@momo.com',
+                    from: {
+                        name: 'The Waterboys',
+                        address: 'TheWater@Boys.com'
+                    }
+                },
+                {
+                    id: _makeId(),
+                    subject: 'Welcome to the Black Parade',
+                    body: `When I was a young boy
                 My father took me into the city
                 To see a marching band
                 He said, "Son, when you grow up
@@ -239,18 +256,18 @@ function _createEmails() {
                 Because the world will never take my heart (we'll carry on)
                 Go and try, you'll never break me (we'll carry on)
                 We want it all, we wanna play this part (we'll carry on!)`,
-                isRead: false,
-                sentAt: 1551133930594,
-                to: 'momo@momo.com',
-                from: {
-                    name: 'My Chemical Romance',
-                    address: 'mychemical@romance.com'
-                }
-            },
-            {
-                id: _makeId(),
-                subject: 'Us',
-                body: `They made a statue of us
+                    isRead: false,
+                    sentAt: 1551133930594,
+                    to: 'momo@momo.com',
+                    from: {
+                        name: 'My Chemical Romance',
+                        address: 'mychemical@romance.com'
+                    }
+                },
+                {
+                    id: _makeId(),
+                    subject: 'Us',
+                    body: `They made a statue of us
                 And then put it on a mountain top
                 Now tourists come and stare at us
                 Blow bubbles with their gum
@@ -296,18 +313,18 @@ function _createEmails() {
                 And it's contagious
                 And it's contagious
                 And it's contagious`,
-                isRead: false,
-                sentAt: 1551133930594,
-                to: 'momo@momo.com',
-                from: {
-                    name: 'Regina Spektor',
-                    address: 'regina@spektor.com'
-                }
-            },
-            {
-                id: _makeId(),
-                subject: 'To Love Somebody',
-                body: `There's a light
+                    isRead: false,
+                    sentAt: 1551133930594,
+                    to: 'momo@momo.com',
+                    from: {
+                        name: 'Regina Spektor',
+                        address: 'regina@spektor.com'
+                    }
+                },
+                {
+                    id: _makeId(),
+                    subject: 'To Love Somebody',
+                    body: `There's a light
                 A certain kind of light
                 That never shone on me
                 I want my life to be lived with you
@@ -344,18 +361,18 @@ function _createEmails() {
                 You don't know what it's like, baby
                 You don't know what it's like
                 To love somebody`,
-                isRead: false,
-                sentAt: 1551133930594,
-                to: 'momo@momo.com',
-                from: {
-                    name: 'Bee Gees',
-                    address: 'bee@gees.com'
-                }
-            }]
-            storageService.postMany(STORAGE_KEY, emails);
-        }
-    })
-    
+                    isRead: false,
+                    sentAt: 1551133930594,
+                    to: 'momo@momo.com',
+                    from: {
+                        name: 'Bee Gees',
+                        address: 'bee@gees.com'
+                    }
+                }]
+                storageService.postMany(STORAGE_KEY, emails);
+            }
+        })
+
 }
 
 function _makeId(length = 8) {

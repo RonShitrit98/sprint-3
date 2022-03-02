@@ -9,11 +9,11 @@ const routes = [
         component: homePage
     },
     {
-        path: '/mail',
+        path: '/mail/:filterBy',
         component: mailApp,
     },{
-        path: '/mail/:mailId',
-        component: mailDetails
+        path: '/mail/:filterBy/:mailId',
+        component: mailDetails,
     },
     {
         path: '/keep',

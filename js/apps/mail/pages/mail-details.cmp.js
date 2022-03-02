@@ -2,7 +2,7 @@ import { mailService } from '../services/mail-service.js'
 export default {
     template: `
     <section v-if="email">
-        <router-link to="/mail">Back</router-link>
+        <router-link :to="returnAddress">Back</router-link>
         <h1>{{email.subject}}</h1>
         <p><h3>{{email.from.name}}</h3>{{email.from.address}}</p>
         <p>{{email.body}}</p>
@@ -14,6 +14,8 @@ export default {
       }
     },
   created() {
+    console.log(this.$route.params.mailId)
+    console.log(this.$route.params.filterBy)
     const id = this.$route.params.mailId
     mailService.get(id)
       .then(email => {
@@ -24,4 +26,9 @@ export default {
           this.email = email
       })
   },
+  computed:{
+    returnAddress(){
+      return `/mail/${this.$route.params.filterBy}`
+    }
+  }
 }
