@@ -1,20 +1,51 @@
 import { mailService } from '../services/mail-service.js'
 import mailList from '../cmps/mail-list.cmp.js'
+import mailFilter from '../cmps/mail-filter.cmp.js'
+import mailAdd from '../cmps/mail-add.cmp.js'
 export default {
     template: `
-    <mail-list v-if="emails" :emails="emails"></mail-list>
+    <div v-if="emails" class="flex">
+        <mail-filter @newEmail="newEmail" @setFilter="filter" :emails="emails"></mail-filter>
+        <mail-list :emails="displayEmails"></mail-list>
+    </div>
+    <mail-add @emailSent="emailSent" v-if="isNewEmail"></mail-add>
     `,
     data() {
         return {
-            emails: null
-
+            emails: null,
+            isNewEmail: false,
+            filterBy: this.$route.params.filterBy,
+            userEmail: 'momo@momo.com'
         }
     },
     created(){
         mailService.query()
         .then(emails => this.emails= emails)
     },
+    computed:{
+        displayEmails(){
+            if (this.filterBy==='inbox') return this.emails.filter(email => email.to === this.userEmail)
+            if (this.filterBy==='sent') return this.emails.filter(email => email.from.address === this.userEmail)
+        }
+    },
+    methods:{
+        newEmail(){
+            this.isNewEmail = true
+            
+        }, emailSent(email){
+            this.emails.unshift(email)
+            this.isNewEmail = false
+        },
+        filter(filterBy){
+            console.log(filterBy)
+            this.filterBy = filterBy
+            this.$router.replace({ path: `/mail/${this.filterBy}` })
+        }
+
+    },
     components:{
         mailList,
+        mailFilter,
+        mailAdd
     }
 }
