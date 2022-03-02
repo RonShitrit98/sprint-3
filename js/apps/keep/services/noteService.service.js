@@ -30,7 +30,8 @@ function _creatNotes() {
                     isPinned: false,
                     info: {
                         txt: 'Fullstack me baby!'
-                    }
+                    },
+                    style: 'green'
                 },
 
                 {
@@ -38,9 +39,10 @@ function _creatNotes() {
                     type: 'note-img',
                     isPinned: false,
                     info: {
-                        url: '/js/apps/keep/img/some-img.jpg',
+                        url: '../img/some-img.jpg',
                         title: 'Some image'
-                    }
+                    },
+                    style: 'none'
                 },
                 {
                     id: 'n103',
@@ -52,7 +54,8 @@ function _creatNotes() {
                             { txt: 'Show the cmp', doneAt: null },
                             { txt: 'Coding power', doneAt: null },
                         ]
-                    }
+                    },
+                    style: 'none'
                 },
                 {
                     id: 'n104',
@@ -60,8 +63,9 @@ function _creatNotes() {
                     isPinned: false,
                     info: {
                         title: 'Some video',
-                        url: '/js/apps/keep/img/some-img.jpg',
-                    }
+                        url: '',
+                    },
+                    style: 'none'
                 },
 
             ]
