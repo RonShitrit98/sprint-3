@@ -1,8 +1,8 @@
 import { noteService } from '../services/noteService.service.js';
-import noteTxt from '../cmps/note-txt.cmp.js';
-import noteImg from '../cmps/note-img.cmp.js';
-import noteVideo from '../cmps/note-video.cmp.js';
-import noteTodos from '../cmps/note-todos.cmp.js';
+import noteTxt from '../cmps/note-txt-prev.cmp.js';
+import noteImg from '../cmps/note-img-prev.cmp.js';
+import noteVideo from '../cmps/note-video-prev.cmp.js';
+import noteTodos from '../cmps/note-todos-prev.cmp.js';
 import editNote from '../cmps/edit-note.cmp.js';
 
 
@@ -11,11 +11,11 @@ export default {
 
     <input type="text">
 
-    <section class="grid main-layout" v-if="notes">
-        <div class="note" v-for="cmp in notes">
-            <component :is="cmp.type" :cmp="cmp" :class="cmp.style" @delete="onDelete" 
+    <section class="grid " v-if="notes">
+        <!-- <div class="note" v-for="cmp in notes"> -->
+            <component class="note" v-for="cmp in notes" :is="cmp.type" :cmp="cmp" :class="cmp.style" @delete="onDelete" 
             @edit="onEdit" ></component>
-        </div>
+        <!-- </div> -->
         
     </section>
 

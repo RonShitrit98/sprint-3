@@ -11,6 +11,7 @@ export const noteService = {
 
 }
 
+
 function updateNote(note) {
     return storageService.put(NOTES_KEY, note)
 }
@@ -46,7 +47,7 @@ function _creatNotes() {
                     info: {
                         url: '../../../../img/some-img.jpg',
                         title: 'Some image',
-                        txt:'img txt'
+                        txt: 'img txt'
                     },
                     style: 'none'
                 },
@@ -55,10 +56,10 @@ function _creatNotes() {
                     type: 'note-todos',
                     isPinned: false,
                     info: {
-                        label: 'Get my stuff together!',
+                        title: 'Get my stuff together!',
                         todos: [
-                            { txt: 'Show the cmp', doneAt: null },
-                            { txt: 'Coding power', doneAt: null },
+                            { txt: 'Show the cmp', doneAt: null, id: utilService.makeId() },
+                            { txt: 'Coding power', doneAt: null, id: utilService.makeId() },
                         ]
                     },
                     style: 'none'
