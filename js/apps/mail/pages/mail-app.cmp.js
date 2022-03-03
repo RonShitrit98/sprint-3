@@ -15,8 +15,8 @@ export default {
                 <div>
                     <mail-search  class="flex" @filterByRead="filterRead" @search="searchEmails"></mail-search>
                     <mail-list v-if="!isMailClicked" @sortEmails="sortEmails" :emails="displayEmails"></mail-list>
+                    <mail-details @update="updateEmail" v-if="isMailClicked"></mail-details>
                 </div>
-                <mail-details @update="updateEmail" v-if="isMailClicked"></mail-details>
             </div>
             <mail-add @emailSent="emailSent" v-if="isNewEmail"></mail-add>
         </section>
