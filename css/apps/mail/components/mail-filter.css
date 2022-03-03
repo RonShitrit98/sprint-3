@@ -1,0 +1,27 @@
+.mail-filter{
+    width: 16rem;
+}
+.mail-filter li{
+    padding-left: 20px;
+    height: 2rem;
+    line-height: 2rem;
+}
+.mail-filter li:hover{
+    cursor: pointer;
+}
+.mail-filter ul{
+    /* width: 10vw; */
+    list-style: none;
+    width: 15rem;
+    padding: 0px;
+}
+.marked{
+    border-radius: 0 20px 20px 0;
+    background-color: var(--mailclropc);
+    font-weight: bold;
+    color: var(--mailclr);
+}
+
+.filter-list{
+    align-self: flex-start;
+}

@@ -1,11 +1,19 @@
 .app-header {
   /* background-color: lightblue; */
-  height: 6vh;
+  /* height: 6vh; */
   display: flex;
-  justify-content: space-between;
+  height: 4rem;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
   border-bottom: 1px solid var(--borderclr);
+}
+
+.header-content{
+  display: flex;
+  width: 90vw;
+  align-items: center;
+  justify-content: space-between;
+
 }
 
 .link-container {
@@ -23,6 +31,9 @@
     font-size: 1.2em;
     /* font-weight: bolder; */
 }
+/* .nav-link:hover span{
+  color:var(--mainclr)
+} */
 
 .main-logo{
   width: 110px;

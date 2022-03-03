@@ -16,6 +16,8 @@
 /* Mail */
 @import './apps/mail/components/mail-list.css';
 @import './apps/mail/components/mail-preview.css';
+@import './apps/mail/components/mail-filter.css';
+@import './apps/mail/components/mail-search.css';
 /* SETUP */
 
 /* BASIC */

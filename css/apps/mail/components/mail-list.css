@@ -1,11 +1,11 @@
 
 .mail-list{
     /* font-size: 0.8rem ; */
-    margin: 1.5rem;
+    margin-right: 1.5rem;
 }
 
 .mail-list table{
-    width: 85vw;
+    width: 80vw;
     border-collapse: collapse;
 }
 

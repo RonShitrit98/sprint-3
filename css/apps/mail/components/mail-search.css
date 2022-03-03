@@ -1,0 +1,13 @@
+.mail-search input{
+    height: 3.125rem;
+    width: 35vw;
+    background-color: var(--readclr);
+    border-radius: 10px;
+    border: none;
+    font-size: 1.3rem;
+    font-family: roboto-reg;
+}
+.mail-search input:focus{
+    outline: none;
+   
+}
