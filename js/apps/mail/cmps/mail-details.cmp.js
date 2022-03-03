@@ -1,6 +1,6 @@
 import { mailService } from '../services/mail-service.js'
 export default {
-    template: `
+  template: `
     <section v-if="email">
         <router-link :to="returnAddress">Back</router-link>
         <h1>{{email.subject}}</h1>
@@ -8,24 +8,25 @@ export default {
         <p>{{email.body}}</p>
     </section>
    ` ,
-      data(){
-      return{
-        email: null,
-      }
-    },
+  data() {
+    return {
+      email: null,
+    }
+  },
   created() {
     const id = this.$route.params.mailId
     mailService.get(id)
       .then(email => {
-          if(!email.isRead){
-              email.isRead = true
-              mailService.updateEmail(email)
-          } 
-          this.email = email
+        if (!email.isRead) {
+          email.isRead = true
+          mailService.updateEmail(email)
+          this.$emit('update', email)
+        }
+        this.email = email
       })
   },
-  computed:{
-    returnAddress(){
+  computed: {
+    returnAddress() {
       return `/mail/${this.$route.params.filterBy}`
     }
   }

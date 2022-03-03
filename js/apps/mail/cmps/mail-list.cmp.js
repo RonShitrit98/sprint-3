@@ -6,26 +6,23 @@ export default {
         <table>
                 <tr>
                     <th>From</th>
-                    <th>Subject</th>
+                    <th @click="sortEmails('subject')">Subject</th>
                     <th>Body</th>
-                    <th>Date</th>
+                    <th @click="sortEmails('date')">Date</th>
                     <th>Actions</th>
                 </tr>  
-              <mail-preview v-for="email in emails" key="email.id" :email="email"/>
-              
-            <!-- <li v-for="email in emails">
-        
-            </li> -->
+                    <mail-preview v-for="email in emails" key="email.id" :email="email"/>
         </table>
 
     </section>
     `,
-    components:{
+    components: {
         mailPreview
     },
     methods: {
-        // openEmail(){
-        //     this.$router.push(`/${this.email.id}`)
+        sortEmails(sortBy) {
+            this.$emit('sortEmails', sortBy)
         }
     }
+}
 

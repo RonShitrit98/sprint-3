@@ -5,7 +5,8 @@ export const mailService = {
     get,
     updateEmail,
     newEmail,
-    remove
+    remove,
+    filter
 }
 
 const STORAGE_KEY = 'emailsDB'
@@ -23,7 +24,7 @@ function updateEmail(email) {
     return storageService.put(STORAGE_KEY, email)
 }
 
-function remove(id){
+function remove(id) {
     return storageService.remove(STORAGE_KEY, id)
 }
 
@@ -43,11 +44,84 @@ function newEmail(email) {
     return storageService.post(STORAGE_KEY, newEmail)
 }
 
+function filter(emails, userEmail, filterBy) {
+    var filteredEmails = emails
+    if (filterBy.mailBox === 'sent') filteredEmails = emails.filter(email => email.from.address === userEmail)
+    else filteredEmails = emails.filter(email => email.to === userEmail)
+    var displayEmails = filteredEmails
+
+    if (filterBy.read === 'unread') displayEmails = filteredEmails.filter(email => !email.isRead)
+    if (filterBy.read === 'read') displayEmails = filteredEmails.filter(email => email.isRead)
+    if (filterBy.searchBy) return displayEmails.filter(email => email.body.match(filterBy.searchBy) ||
+        email.subject.match(filterBy.searchBy) || email.from.name.match(filterBy.searchBy))
+
+    if (filterBy.sortBy === 'date') return displayEmails.sort(function (a, b) { return (a.sentAt > b.sentAt ? -1 : (a.sentAt === b.sentAt ? 0 : 1)) })
+    if (filterBy.sortBy === 'subject') return displayEmails.sort((a, b) => a.subject.localeCompare(b.subject))
+    
+    return displayEmails
+}
+
 function _createEmails() {
     storageService.query(STORAGE_KEY)
         .then(emails => {
             if (!emails || !emails.length) {
                 emails = [{
+                    id: _makeId(),
+                    subject: 'Us',
+                    body: `They made a statue of us
+                And then put it on a mountain top
+                Now tourists come and stare at us
+                Blow bubbles with their gum
+                Take photographs of fun, have fun
+                They'll name a city after us
+                And later say it's all our fault
+                Then they'll give us a talking to
+                Then they'll give us a talking to
+                'Cause they've got years of experience
+                We're living in a den of thieves
+                Rummaging for answers in the pages
+                We're living in a den of thieves
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                We wear our scarves just like a noose
+                But not 'cause we want eternal sleep
+                And though our parts are slightly used
+                New ones are slave labor you can keep
+                We're living in a den of thieves
+                Rummaging for answers in the pages
+                We're living in a den of thieves
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                They made a statue of us
+                They made a statue of us
+                The tourists come and stare at us
+                The sculptor's mama sends regards
+                They made a statue of us
+                They made a statue of us
+                Our noses have begun to rust
+                We're living in a den of thieves
+                Rummaging for answers in the pages
+                We're living in a den of thieves
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                And it's contagious
+                And it's contagious`,
+                    isRead: false,
+                    sentAt: 1632169060000,
+                    to: 'momo@momo.com',
+                    from: {
+                        name: 'Regina Spektor',
+                        address: 'regina@spektor.com'
+                    }
+                }, {
                     id: _makeId(),
                     subject: 'Suspicious Minds',
                     body: `We're caught in a trap
@@ -102,7 +176,7 @@ function _createEmails() {
                 Because I love you too much, baby
                 Well, don't you know I'm caught in a trap?`,
                     isRead: false,
-                    sentAt: 1551133930594,
+                    sentAt: 1645388260000,
                     to: 'momo@momo.com',
                     from: {
                         name: 'Elvis Presley',
@@ -178,7 +252,7 @@ function _createEmails() {
                 Too soon
                 You saw the whole of the moon`,
                     isRead: false,
-                    sentAt: 1551133930594,
+                    sentAt: 1642709860000,
                     to: 'momo@momo.com',
                     from: {
                         name: 'The Waterboys',
@@ -262,68 +336,11 @@ function _createEmails() {
                 Go and try, you'll never break me (we'll carry on)
                 We want it all, we wanna play this part (we'll carry on!)`,
                     isRead: false,
-                    sentAt: 1551133930594,
+                    sentAt: 1634761060000,
                     to: 'momo@momo.com',
                     from: {
                         name: 'My Chemical Romance',
                         address: 'mychemical@romance.com'
-                    }
-                },
-                {
-                    id: _makeId(),
-                    subject: 'Us',
-                    body: `They made a statue of us
-                And then put it on a mountain top
-                Now tourists come and stare at us
-                Blow bubbles with their gum
-                Take photographs of fun, have fun
-                They'll name a city after us
-                And later say it's all our fault
-                Then they'll give us a talking to
-                Then they'll give us a talking to
-                'Cause they've got years of experience
-                We're living in a den of thieves
-                Rummaging for answers in the pages
-                We're living in a den of thieves
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                We wear our scarves just like a noose
-                But not 'cause we want eternal sleep
-                And though our parts are slightly used
-                New ones are slave labor you can keep
-                We're living in a den of thieves
-                Rummaging for answers in the pages
-                We're living in a den of thieves
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                They made a statue of us
-                They made a statue of us
-                The tourists come and stare at us
-                The sculptor's mama sends regards
-                They made a statue of us
-                They made a statue of us
-                Our noses have begun to rust
-                We're living in a den of thieves
-                Rummaging for answers in the pages
-                We're living in a den of thieves
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                And it's contagious
-                And it's contagious`,
-                    isRead: false,
-                    sentAt: 1551133930594,
-                    to: 'momo@momo.com',
-                    from: {
-                        name: 'Regina Spektor',
-                        address: 'regina@spektor.com'
                     }
                 },
                 {

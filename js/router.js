@@ -1,7 +1,7 @@
 import keepApp from './apps/keep/pages/keep-app.cmp.js'
 import mailApp from './apps/mail/pages/mail-app.cmp.js'
 import homePage from './pages/home-page.cmp.js'
-import mailDetails from './apps/mail/pages/mail-details.cmp.js'
+import mailDetails from './apps/mail/cmps/mail-details.cmp.js'
 
 const routes = [
     {
@@ -11,9 +11,10 @@ const routes = [
     {
         path: '/mail/:filterBy',
         component: mailApp,
-    },{
-        path: '/mail/:filterBy/:mailId',
-        component: mailDetails,
+        children:[{
+            path: ':mailId',
+            component: mailDetails,
+        }]
     },
     {
         path: '/keep',
