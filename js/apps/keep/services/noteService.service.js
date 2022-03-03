@@ -10,8 +10,13 @@ export const noteService = {
     updateNote,
     getEmptyNote,
     save,
-    getEmptyTodo
+    getEmptyTodo,
+    duplicate
 
+}
+
+function duplicate(note){
+    return storageService.post(NOTES_KEY, note);
 }
 
 function getEmptyTodo() {
