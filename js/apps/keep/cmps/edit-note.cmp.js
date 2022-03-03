@@ -38,16 +38,19 @@ export default {
         }
     },
     methods: {
-        close({ title, txt }) {
-            this.note.info.title = title
-            this.note.info.txt = txt
-
-            this.$emit('close', { ...this.note })
+        close({ title, txt, note }) {
+            if (note){
+                this.$emit('close', { ...note })
+            }
+            else{
+                if (title) this.note.info.title = title;
+                if (txt) this.note.info.txt = txt;
+                this.$emit('close', { ...this.note });
+            }
         },
         onSetColor(color) {
-            console.log('color');
             this.note.style = color;
-            this.$emit('color', { ...this.note })
+            this.$emit('color', { ...this.note });
         }
     },
     computed: {

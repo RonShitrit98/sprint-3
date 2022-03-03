@@ -11,7 +11,8 @@ export default {
         <div class="add-todo" v-for="todo in note.info.todos">
             <button @click="onDeleteTodo(todo.id)">x</button>
             <input type="text" placeholder="note" v-model="todo.txt">
-            <input type="checkbox" name="" id="">
+            <input type="checkbox" @change="isDone(todo.id)" v-if="todo.doneAt" checked>
+            <input type="checkbox" @change="isDone(todo.id)" v-if="!todo.doneAt">
         </div>
 
         <input type="text" v-model="txt">
@@ -26,11 +27,16 @@ export default {
         return {
             title: this.note.info.title,
             txt: null,
+            todos: []
         }
     },
     methods: {
         close() {
-            this.$emit('close', { title: this.title, txt: this.txt })
+            if (this.title) this.note.info.title = this.title;
+            if (this.txt) this.note.info.txt = this.txt;
+            if (this.todos && this.todos.length > 0) this.note.info.todos = this.todos;
+            this.$emit('close', { ...this.note })
+            
         },
         onDeleteTodo(id) {
             const idx = this.note.info.todos.findIndex(todo => todo.id === id);
@@ -41,6 +47,17 @@ export default {
             const newId = utilService.makeId()
             this.note.info.todos.push({ txt: this.txt, doneAt: null, id: newId })
             this.txt = ''
-        }
+        },
+        isDone(todoId) {
+            this.todos = this.note.info.todos.map(todo => {
+                if (todo.id === todoId) {
+                    if (!todo.doneAt) {
+                        todo.doneAt = Date.now();
+                    }
+                    else todo.doneAt = null;
+                }
+                return todo
+            })
+        },
     },
 }

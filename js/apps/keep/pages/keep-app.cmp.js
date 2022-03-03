@@ -17,14 +17,14 @@ export default {
         <section class="pinned-notes" v-if="pinnedNotes.length > 0">
                 <div v-for="note in pinnedNotes">
                     <component class="note" :is="note.type" :cmp="note" :class="note.style" 
-                    @delete="onDelete" @edit="onEdit" @pin="pinTheNote"></component>
+                    @delete="onDelete" @edit="onEdit" @pin="pinTheNote" @todoDone="markAsDone"></component>
                 </div>
         </section>
 
     <section class="grid " v-if="notes">
             <component class="note" v-for="cmp in notesForDisplay" :is="cmp.type" :cmp="cmp" 
             :class="cmp.style" @delete="onDelete" @edit="onEdit" @pin="pinTheNote"
-            @duplicate="duplicateNote"></component>
+            @duplicate="duplicateNote" @todoDone="markAsDone"></component>
     </section>
 
     <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
@@ -108,6 +108,26 @@ export default {
             noteService.duplicate(note)
                 .then(note => {
                     this.notes.unshift(note)
+                })
+        },
+        markAsDone(todoId) {
+            const note = this.notes.find(note => {
+                if (note.type === 'note-todos') {
+                    note.info.todos.find(todo => {
+                        if (todo.id === todoId) {
+                            if (!todo.doneAt) {
+                                todo.doneAt = Date.now();
+                            }
+                            else todo.doneAt = null;
+                        }
+                    })
+                    return note
+                }
+            })
+            noteService.updateNote(note)
+                .then(note => {
+                    const idx = this.notes.findIndex(currNote => currNote.id === note.id)
+                    this.notes[idx] = note
                 })
         }
     },
