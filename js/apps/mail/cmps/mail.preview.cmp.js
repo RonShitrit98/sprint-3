@@ -6,7 +6,7 @@ export default {
     template: `
     <!-- <router-link :to="'/mail/'+email.id"> -->
     <tr v-if="email" @click.stop.prevent="goToEmail" :class="emailClass">
-        <td><button class="stars" @click.stop="starEmail"><img :src="starIcon"></button></td>
+        <td><label class="stars" @click.stop="starEmail"><img :src="starIcon"></label></td>
         <td>{{email.from.name}}</td>
         <td>{{email.subject}}</td>
         <td>{{emailBodyPrev}}</td>
@@ -18,12 +18,12 @@ export default {
     computed: {
         emailBodyPrev() {
             if(!this.email.body) return 
-            return this.email.body.slice(0, 160) + '...'
+            return this.email.body.slice(0, 100) + '...'
         },
         emailClass() {
             const { isRead } = this.email
-            if (!isRead) return 'email-unread'
-            if (isRead) return 'email-read'
+            if (!isRead) return 'mail-preview email-unread'
+            if (isRead) return 'mail-preview email-read'
         },
         emailDate() {
             const months = ["January", "February", "March", "April", "May", "June",

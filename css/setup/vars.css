@@ -1,0 +1,9 @@
+:root{
+    --mainclr: #6F69AC;
+    --noteclr : #FFEBA1;
+    --mailclr: #FD6F96;
+    --bookclr: #95DAC1;
+    --borderclr: #dbdcdd;
+    /* --borderclr: #ECEFF0; */
+    --readclr: #F5F7F7;
+}
