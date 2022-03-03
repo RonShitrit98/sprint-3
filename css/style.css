@@ -1,7 +1,8 @@
 /* MAIN */
 
 /* SETUP */
-
+@import './setup/typography.css';
+@import './setup/vars.css';
 /* BASIC */
 @import './basic/helpers.css';
 @import './basic/base.css';
@@ -14,6 +15,7 @@
 
 /* Mail */
 @import './apps/mail/components/mail-list.css';
+@import './apps/mail/components/mail-preview.css';
 /* SETUP */
 
 /* BASIC */

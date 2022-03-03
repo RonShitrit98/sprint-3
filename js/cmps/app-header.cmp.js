@@ -1,12 +1,12 @@
 export default {
     template: `
     <section class="app-header">
-        <h1>Header!</h1>
-        <div class="link-container">
-            <router-link class="nav-link" to="/">Home</router-link>
-            <router-link class="nav-link" to="/keep">Keep</router-link>
-            <router-link class="nav-link" to="/mail/inbox">Mail</router-link>
-        </div>
+        <router-link to="/"><img class="main-logo" src="../img/designs/logo.png"/></router-link>
+        <nav class="main-nav link-container">
+            <router-link class="nav-link mail-link" to="/mail/inbox"><span>M</span>ail</router-link>
+            <router-link class="nav-link book-link" to="/"><span>B</span>ooks</router-link>
+            <router-link class="nav-link note-link" to="/keep"><span>N</span>otes</router-link>
+        </nav>
     </section>
     `
 }

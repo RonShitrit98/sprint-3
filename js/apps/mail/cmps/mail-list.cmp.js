@@ -2,7 +2,7 @@ import mailPreview from './mail.preview.cmp.js'
 export default {
     props: ['emails'],
     template: `
-    <section>
+    <section class="mail-list">
         <table>
                 <tr>
                     <th></th>

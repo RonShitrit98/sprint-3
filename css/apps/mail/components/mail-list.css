@@ -1,15 +1,14 @@
-.email-unread :not(:nth-child(3n)){
-    font-weight: bold;
+
+.mail-list{
+    /* font-size: 0.8rem ; */
+    margin: 1.5rem;
 }
 
-.email-read{
-    background-color: rgb(189, 189, 189);
+.mail-list table{
+    width: 85vw;
+    border-collapse: collapse;
 }
 
-.stars img{
-height: 16px;
-width: 16px
-}
 
 .mail>*{
     font-family: Arial, Helvetica, sans-serif;

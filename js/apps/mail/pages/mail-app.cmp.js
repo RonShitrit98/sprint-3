@@ -8,7 +8,7 @@ import mailSearch from '../cmps/mail-search.cmp.js'
 
 export default {
     template: `
-        <section class="mail">
+        <section class="mail main-layout">
             <mail-search @filterByRead="filterRead" @search="searchEmails"></mail-search>
             <div v-if="emails" class="flex">
                 <mail-filter @newEmail="newEmail" @setFilter="filter" :emails="emails"></mail-filter>
