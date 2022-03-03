@@ -17,9 +17,16 @@
 }
 
 .note {
-  /* display: inline-block; */
   border: 1px solid black;
   padding: 15px;
   width: 238px;
   height: fit-content;
+}
+
+.add-method{
+  margin: 10px auto;
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
 }

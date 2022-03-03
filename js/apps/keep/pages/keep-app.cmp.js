@@ -4,18 +4,17 @@ import noteImg from '../cmps/note-img-prev.cmp.js';
 import noteVideo from '../cmps/note-video-prev.cmp.js';
 import noteTodos from '../cmps/note-todos-prev.cmp.js';
 import editNote from '../cmps/edit-note.cmp.js';
+import addNote from '../cmps/add-note.cmp.js';
 
 
 export default {
     template: `
 
-    <input type="text">
+    <add-note :notes="notes" @newNote="onAddNote" />
 
     <section class="grid " v-if="notes">
-        <!-- <div class="note" v-for="cmp in notes"> -->
             <component class="note" v-for="cmp in notes" :is="cmp.type" :cmp="cmp" :class="cmp.style" @delete="onDelete" 
             @edit="onEdit" ></component>
-        <!-- </div> -->
         
     </section>
 
@@ -28,7 +27,8 @@ export default {
         noteImg,
         noteVideo,
         noteTodos,
-        editNote
+        editNote,
+        addNote
     },
     data() {
         return {
@@ -68,6 +68,9 @@ export default {
                     const idx = this.notes.findIndex(currNote => currNote.id === note.id)
                     this.notes[idx] = note
                 })
+        },
+        onAddNote(note) {
+            this.notes.unshift(note)
         }
     }
 

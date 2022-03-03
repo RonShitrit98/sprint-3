@@ -8,9 +8,46 @@ export const noteService = {
     query,
     deleteNote,
     updateNote,
+    getEmptyNote,
+    save,
+    getEmptyTodo
 
 }
 
+function getEmptyTodo() {
+    return {
+        txt: null,
+        doneAt: null,
+        id: utilService.makeId()
+    }
+}
+
+function getEmptyNote(type, style) {
+    const note = {
+        id: utilService.makeId(),
+        type: 'note-' + type,
+        isPinned: false,
+        info: {
+            title: null,
+            txt: null,
+        },
+        style
+    }
+
+    if (type === 'img' || type === 'video') {
+        note.info.url = null
+        return note
+    }
+    else if (type === 'todos') {
+        note.info.todos = []
+        return note
+    }
+    return note
+}
+
+function save(newNote) {
+    return storageService.post(NOTES_KEY, newNote);
+}
 
 function updateNote(note) {
     return storageService.put(NOTES_KEY, note)
