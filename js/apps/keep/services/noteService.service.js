@@ -8,7 +8,45 @@ export const noteService = {
     query,
     deleteNote,
     updateNote,
+    getEmptyNote,
+    save,
+    getEmptyTodo
 
+}
+
+function getEmptyTodo() {
+    return {
+        txt: null,
+        doneAt: null,
+        id: utilService.makeId()
+    }
+}
+
+function getEmptyNote(type, style) {
+    const note = {
+        id: utilService.makeId(),
+        type: 'note-' + type,
+        isPinned: false,
+        info: {
+            title: null,
+            txt: null,
+        },
+        style
+    }
+
+    if (type === 'img' || type === 'video') {
+        note.info.url = null
+        return note
+    }
+    else if (type === 'todos') {
+        note.info.todos = []
+        return note
+    }
+    return note
+}
+
+function save(newNote) {
+    return storageService.post(NOTES_KEY, newNote);
 }
 
 function updateNote(note) {
@@ -44,9 +82,9 @@ function _creatNotes() {
                     type: 'note-img',
                     isPinned: false,
                     info: {
-                        url: '../img/some-img.jpg',
+                        url: '../../../../img/some-img.jpg',
                         title: 'Some image',
-                        txt:'img txt'
+                        txt: 'img txt'
                     },
                     style: 'none'
                 },
@@ -55,10 +93,10 @@ function _creatNotes() {
                     type: 'note-todos',
                     isPinned: false,
                     info: {
-                        label: 'Get my stuff together!',
+                        title: 'Get my stuff together!',
                         todos: [
-                            { txt: 'Show the cmp', doneAt: null },
-                            { txt: 'Coding power', doneAt: null },
+                            { txt: 'Show the cmp', doneAt: null, id: utilService.makeId() },
+                            { txt: 'Coding power', doneAt: null, id: utilService.makeId() },
                         ]
                     },
                     style: 'none'
