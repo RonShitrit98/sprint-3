@@ -2,7 +2,7 @@ import { noteService } from '../services/noteService.service.js';
 
 export default {
     props: ['notes'],
-    emits: ['newNote'],
+    emits: ['newNote', 'adding'],
     template: `
     <section class="add-new-note">
         <div class="add-method" v-if="!chosenType">
@@ -71,6 +71,7 @@ export default {
         setType(type) {
             console.log('working');
             this.chosenType = type;
+            this.$emit('adding')
         },
         addNewNote() {
             const note = noteService.getEmptyNote(this.chosenType, this.chosenColor);
@@ -89,6 +90,7 @@ export default {
             this.url = null;
             this.todos = [];
             this.chosenType = null;
+            this.$emit('adding')
         },
         onSetColor(color) {
             console.log('color');

@@ -5,22 +5,30 @@ import noteVideo from '../cmps/note-video-prev.cmp.js';
 import noteTodos from '../cmps/note-todos-prev.cmp.js';
 import editNote from '../cmps/edit-note.cmp.js';
 import addNote from '../cmps/add-note.cmp.js';
+import filterNotes from '../cmps/filter-notes.cmp.js';
 
 
 export default {
     template: `
+        <add-note :notes="notes" @newNote="onAddNote" @adding="isFilter = !isFilter"/>
+    
+        <filter-notes v-if="isFilter" @filter="setFilter" />
 
-    <add-note :notes="notes" @newNote="onAddNote" />
+        <section class="pinned-notes" v-if="pinnedNotes.length > 0">
+                <div v-for="note in pinnedNotes">
+                    <component class="note" :is="note.type" :cmp="note" :class="note.style" 
+                    @delete="onDelete" @edit="onEdit" @pin="pinTheNote"></component>
+                </div>
+        </section>
 
     <section class="grid " v-if="notes">
-            <component class="note" v-for="cmp in notes" :is="cmp.type" :cmp="cmp" :class="cmp.style" @delete="onDelete" 
-            @edit="onEdit" ></component>
-        
+            <component class="note" v-for="cmp in notesForDisplay" :is="cmp.type" :cmp="cmp" 
+            :class="cmp.style" @delete="onDelete" @edit="onEdit" @pin="pinTheNote"
+            @duplicate="duplicateNote"></component>
     </section>
 
     <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
 
-    
         `,
     components: {
         noteTxt,
@@ -28,13 +36,17 @@ export default {
         noteVideo,
         noteTodos,
         editNote,
-        addNote
+        addNote,
+        filterNotes
     },
     data() {
         return {
             notes: null,
             isEdit: false,
-            selectedNote: null
+            selectedNote: null,
+            isFilter: true,
+            filterBy: null,
+            pinnedNotes: [],
         }
     },
     created() {
@@ -71,6 +83,41 @@ export default {
         },
         onAddNote(note) {
             this.notes.unshift(note)
+        },
+        setFilter(filterBy) {
+            console.log(filterBy);
+            this.filterBy = filterBy
+        },
+        pinTheNote(note) {
+            note.isPinned = !note.isPinned
+            noteService.updateNote(note)
+                .then(note => {
+                    if (note.isPinned) {
+                        const idx = this.pinnedNotes.findIndex(currNote => currNote.id === note.id)
+                        this.pinnedNotes.splice(idx, 1)
+                        this.notes.unshift(note)
+                    }
+                    else {
+                        const idx = this.notes.findIndex(currNote => currNote.id === note.id)
+                        this.notes.splice(idx, 1)
+                        this.pinnedNotes.unshift(note)
+                    }
+                })
+        },
+        duplicateNote(note) {
+            noteService.duplicate(note)
+                .then(note => {
+                    this.notes.unshift(note)
+                })
+        }
+    },
+    computed: {
+        notesForDisplay() {
+            if (!this.filterBy) return this.notes;
+            const regex = new RegExp(this.filterBy, 'i')
+            return this.notes.filter(note => {
+                if (note.type === this.filterBy || regex.test(note.info.title)) return note
+            })
         }
     }
 
