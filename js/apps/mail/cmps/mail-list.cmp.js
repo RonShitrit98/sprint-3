@@ -5,6 +5,7 @@ export default {
     <section>
         <table>
                 <tr>
+                    <th></th>
                     <th>From</th>
                     <th @click="sortEmails('subject')">Subject</th>
                     <th>Body</th>

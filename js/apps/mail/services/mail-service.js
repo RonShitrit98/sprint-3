@@ -34,6 +34,7 @@ function newEmail(email) {
         subject: email.subject,
         body: email.body,
         isRead: false,
+        isStarred: false,
         sentAt: Date.now(),
         to: email.to,
         from: {
@@ -47,6 +48,7 @@ function newEmail(email) {
 function filter(emails, userEmail, filterBy) {
     var filteredEmails = emails
     if (filterBy.mailBox === 'sent') filteredEmails = emails.filter(email => email.from.address === userEmail)
+    else if(filterBy.mailBox === 'star') filteredEmails = emails.filter(email => email.isStarred)
     else filteredEmails = emails.filter(email => email.to === userEmail)
     var displayEmails = filteredEmails
 
@@ -57,7 +59,7 @@ function filter(emails, userEmail, filterBy) {
 
     if (filterBy.sortBy === 'date') return displayEmails.sort(function (a, b) { return (a.sentAt > b.sentAt ? -1 : (a.sentAt === b.sentAt ? 0 : 1)) })
     if (filterBy.sortBy === 'subject') return displayEmails.sort((a, b) => a.subject.localeCompare(b.subject))
-    
+
     return displayEmails
 }
 
@@ -115,6 +117,7 @@ function _createEmails() {
                 And it's contagious
                 And it's contagious`,
                     isRead: false,
+                    isStarred: false,
                     sentAt: 1632169060000,
                     to: 'momo@momo.com',
                     from: {
@@ -176,6 +179,7 @@ function _createEmails() {
                 Because I love you too much, baby
                 Well, don't you know I'm caught in a trap?`,
                     isRead: false,
+                    isStarred: false,
                     sentAt: 1645388260000,
                     to: 'momo@momo.com',
                     from: {
@@ -252,6 +256,7 @@ function _createEmails() {
                 Too soon
                 You saw the whole of the moon`,
                     isRead: false,
+                    isStarred: false,
                     sentAt: 1642709860000,
                     to: 'momo@momo.com',
                     from: {
@@ -336,6 +341,7 @@ function _createEmails() {
                 Go and try, you'll never break me (we'll carry on)
                 We want it all, we wanna play this part (we'll carry on!)`,
                     isRead: false,
+                    isStarred: false,
                     sentAt: 1634761060000,
                     to: 'momo@momo.com',
                     from: {
@@ -384,6 +390,7 @@ function _createEmails() {
                 You don't know what it's like
                 To love somebody`,
                     isRead: false,
+                    isStarred: false,
                     sentAt: 1551133930594,
                     to: 'momo@momo.com',
                     from: {

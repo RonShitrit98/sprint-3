@@ -8,6 +8,7 @@ export default {
                 <ul>
                     <li @click="setFilter('inbox')">Inbox({{unreadEmails}})</li>
                     <li @click="setFilter('sent')">sent({{unopendSentEmails}})</li>
+                    <li @click="setFilter('star')">Starred</li>
                 </ul>
             </div>
         </section>

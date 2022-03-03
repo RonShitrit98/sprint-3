@@ -1,9 +1,12 @@
 import { eventBus } from '../../../services/eventBus.service.js'
+import { mailService } from '../services/mail-service.js'
+
 export default {
     props: ['email'],
     template: `
     <!-- <router-link :to="'/mail/'+email.id"> -->
     <tr v-if="email" @click.stop.prevent="goToEmail" :class="emailClass">
+        <td><button class="stars" @click.stop="starEmail"><img :src="starIcon"></button></td>
         <td>{{email.from.name}}</td>
         <td>{{email.subject}}</td>
         <td>{{emailBodyPrev}}</td>
@@ -27,6 +30,10 @@ export default {
                 "July", "August", "September", "October", "November", "December" ]
             const date = new Date(this.email.sentAt)
             return `${months[date.getMonth()]} ${date.getDate()}`
+        },
+        starIcon(){
+            if(this.email.isStarred) return '../../../../img/mail-imgs/starred.png'
+            return '../../../../img/mail-imgs/notStarred.png'
         }
     },
     methods: {
@@ -36,9 +43,28 @@ export default {
         removeEmail(){
             // console.log('removing')
             eventBus.emit('removeEmail', this.email.id)
+        },
+        starEmail(){
+            var isStarred = true
+            if (this.email.isStarred) isStarred = false
+                          this.email.isStarred = isStarred
+                          mailService.updateEmail(this.email)
+                          this.$emit('update', this.email)
         }
     }
 
 }
+
+// created() {
+//     const id = this.$route.params.mailId
+//     mailService.get(id)
+//       .then(email => {
+//         if (!email.isRead) {
+//           email.isRead = true
+//           mailService.updateEmail(email)
+//           this.$emit('update', email)
+//         }
+//         this.email = email
+//       })
 
 

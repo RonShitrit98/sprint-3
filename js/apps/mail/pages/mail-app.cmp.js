@@ -8,13 +8,15 @@ import mailSearch from '../cmps/mail-search.cmp.js'
 
 export default {
     template: `
-        <mail-search @filterByRead="filterRead" @search="searchEmails"></mail-search>
-        <div v-if="emails" class="flex">
-            <mail-filter @newEmail="newEmail" @setFilter="filter" :emails="emails"></mail-filter>
-            <mail-list v-if="!isMailClicked" @sortEmails="sortEmails" :emails="displayEmails"></mail-list>
-            <mail-details @update="updateEmail" v-if="isMailClicked"></mail-details>
-        </div>
-        <mail-add @emailSent="emailSent" v-if="isNewEmail"></mail-add>
+        <section class="mail">
+            <mail-search @filterByRead="filterRead" @search="searchEmails"></mail-search>
+            <div v-if="emails" class="flex">
+                <mail-filter @newEmail="newEmail" @setFilter="filter" :emails="emails"></mail-filter>
+                <mail-list v-if="!isMailClicked" @sortEmails="sortEmails" :emails="displayEmails"></mail-list>
+                <mail-details @update="updateEmail" v-if="isMailClicked"></mail-details>
+            </div>
+            <mail-add @emailSent="emailSent" v-if="isNewEmail"></mail-add>
+        </section>
     `,
     data() {
         return {
