@@ -7,11 +7,11 @@ import noteTodos from '../cmps/note-todos-prev.cmp.js';
 import editNote from '../cmps/edit-note.cmp.js';
 import addNote from '../cmps/add-note.cmp.js';
 import filterNotes from '../cmps/filter-notes.cmp.js';
-// import colorPicker from '../cmps/color-picker.cmp.js';
 
 
 export default {
     template: `
+    <section class="keep-app keep-main-layout">
         <add-note :notes="notes" @newNote="onAddNote" @adding="isFilter = !isFilter"/>
     
         <filter-notes v-if="isFilter" @filter="setFilter" />
@@ -32,8 +32,7 @@ export default {
     </section>
 
     <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
-
-    <!-- <color-picker v-if="isPick" @pickColor="isPick = !isPick" /> -->
+    </section>
 
         `,
     components: {
@@ -44,7 +43,6 @@ export default {
         editNote,
         addNote,
         filterNotes,
-        // colorPicker
     },
     data() {
         return {
@@ -54,7 +52,6 @@ export default {
             isFilter: true,
             filterBy: null,
             pinnedNotes: [],
-            // isPick: null
         }
     },
     created() {

@@ -1,6 +1,6 @@
 .grid-container {
   /* width: 70%; */
-  margin: 10px auto;
+  /* margin: 10px auto; */
 }
 
 .grid {
@@ -17,7 +17,6 @@
   justify-content: space-between;
   border-radius: 10px;
   overflow: hidden;
-  /* position: relative; */
     height: 100%;
 }
 

@@ -1,0 +1,29 @@
+/* MOBILE */
+@media (max-width: 610px){
+    .keep-main-layout{
+        max-width: 350px;
+    }
+
+}
+
+/* MEDIUM */
+@media (min-width: 610px){ 
+    .keep-main-layout{
+        max-width: 504px;
+    }
+}
+
+@media (min-width: 1090px){
+    .keep-main-layout{
+        max-width: 752px;
+    }
+
+}
+
+
+/* DESKTOP */
+@media (min-width: 1300px){
+    .keep-main-layout{
+        max-width: 1000px;
+    }
+}

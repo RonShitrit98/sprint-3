@@ -30,6 +30,8 @@
 /* SETUP */
 
 /* BASIC */
+@import './apps/keep/basic/keep-main-layout.css';
+@import './apps/keep/basic/keep-mq.css';
 
 /* COMPONENTS */
 @import './apps/keep/components/keep-app.css';
