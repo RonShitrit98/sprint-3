@@ -6,3 +6,7 @@
     font-family: roboto-reg;
     src: url('../../fonts/Roboto/Roboto-Regular.ttf');
 }
+@font-face {
+    font-family: product-reg;
+    src: url('../../fonts/product-sans/Product\ Sans\ Regular.ttf');
+}

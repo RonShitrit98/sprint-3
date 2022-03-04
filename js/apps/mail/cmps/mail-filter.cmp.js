@@ -3,7 +3,8 @@ export default {
     template: `
         <section class="mail-filter flex direction-column">
             <div class="filter-logo">Mail</div>
-            <button @click="newEmail">New Email</button>
+            <button class="new-mail-btn" @click="newEmail">
+                <img src="./img/mail-imgs/plus.png">Compose</button>
             <div class="filter-list">
                 <ul>
                     <li :class="inboxClass" @click="setFilter('inbox')">Inbox {{unreadEmails}}</li>
