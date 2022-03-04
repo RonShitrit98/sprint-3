@@ -2,12 +2,12 @@ export default {
     props: ['cmp'],
     emits:['delete', 'edit', 'pin', 'duplicate'],
     template: `
-    <section class="content-container" @click="onEdit(cmp.id)">
+    <section :class="['note-txt', noteSpan]" @click.stop="onEdit(cmp.id)">
 
         <label @click.stop="pinTheNote(cmp)">pin</label> | |
-        <label @click.stop="duplicateNote(cmp)">duplicate</label>
+        <label style="align-self: end;" @click.stop="duplicateNote(cmp)">duplicate</label>
         
-        <h1>{{cmp.info.txt}}</h1>
+        <pre>{{cmp.info.txt}}</pre>
 
         <button @click.stop="onDeleteNote(cmp.id)">X</button>
     </section>
@@ -29,6 +29,11 @@ export default {
         },
         duplicateNote(note){
             this.$emit('duplicate', {...note})
+        }
+    },
+    computed:{
+        noteSpan(){
+
         }
     }
 }

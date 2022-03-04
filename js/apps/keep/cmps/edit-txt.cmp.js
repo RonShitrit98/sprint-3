@@ -6,7 +6,7 @@ export default {
 
         <input type="text" placeholder="title" v-model="title">
 
-            <input type="text" placeholder="note" v-model="txt">
+            <textarea type="text" placeholder="note" v-model="txt"></textarea>
 
         <button @click="close">Close</button>
         

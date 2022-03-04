@@ -6,6 +6,7 @@ import noteTodos from '../cmps/note-todos-prev.cmp.js';
 import editNote from '../cmps/edit-note.cmp.js';
 import addNote from '../cmps/add-note.cmp.js';
 import filterNotes from '../cmps/filter-notes.cmp.js';
+import { utilService } from '../../../services/util.service.js';
 
 
 export default {
@@ -16,15 +17,17 @@ export default {
 
         <section class="pinned-notes" v-if="pinnedNotes.length > 0">
                 <div v-for="note in pinnedNotes">
-                    <component class="note" :is="note.type" :cmp="note" :class="note.style" 
+                    <component :class="['note', note.type]" :is="note.type" :cmp="note" :class="note.style" 
                     @delete="onDelete" @edit="onEdit" @pin="pinTheNote" @todoDone="markAsDone"></component>
                 </div>
         </section>
 
-    <section class="grid " v-if="notes">
+    <section class="grid-container" v-if="notes">
+        <div class="grid">
             <component class="note" v-for="cmp in notesForDisplay" :is="cmp.type" :cmp="cmp" 
             :class="cmp.style" @delete="onDelete" @edit="onEdit" @pin="pinTheNote"
-            @duplicate="duplicateNote" @todoDone="markAsDone"></component>
+            @duplicate="duplicateNote" @todoDone="markAsDone" @color="onSetColor"></component>
+        </div>
     </section>
 
     <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
@@ -50,14 +53,23 @@ export default {
         }
     },
     created() {
-        noteService.query()
+        noteService.query('notes')
             .then(notes => {
-                this.notes = notes
-                console.log(this.notes);
+                this.notes = notes.map(note => {
+                    if (note.isPinned) {
+                        this.pinnedNotes.push(note)
+                    }
+                    else return note
+                })
             })
     },
     methods: {
         onDelete(id) {
+            const note = this.notes.find(note => note.id === id);
+            if (!note) {
+                const idx = this.pinnedNotes.findIndex(note => note.id === id)
+                this.pinnedNotes.splice(idx,1)
+            }
             noteService.deleteNote(id)
                 .then(res => this.notes = res)
         },
@@ -89,22 +101,28 @@ export default {
             this.filterBy = filterBy
         },
         pinTheNote(note) {
-            note.isPinned = !note.isPinned
-            noteService.updateNote(note)
-                .then(note => {
-                    if (note.isPinned) {
+            if (note.isPinned) {
+                note.isPinned = false;
+                noteService.updateNote(note)
+                    .then(note => {
                         const idx = this.pinnedNotes.findIndex(currNote => currNote.id === note.id)
                         this.pinnedNotes.splice(idx, 1)
                         this.notes.unshift(note)
-                    }
-                    else {
+                    })
+            }
+            else {
+                note.isPinned = true;
+                noteService.updateNote(note)
+                    .then(note => {
                         const idx = this.notes.findIndex(currNote => currNote.id === note.id)
                         this.notes.splice(idx, 1)
                         this.pinnedNotes.unshift(note)
-                    }
-                })
+                    })
+            }
         },
         duplicateNote(note) {
+            note.id = utilService.makeId();
+            console.log(note);
             noteService.duplicate(note)
                 .then(note => {
                     this.notes.unshift(note)

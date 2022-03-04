@@ -14,19 +14,19 @@ export default {
 
         <section class="type-txt" v-if="chosenType === 'txt'">
             <input type="text" placeholder="title" v-model="title">
-            <input type="text" placeholder="txt" v-model="txt">
+            <textarea type="text" placeholder="txt" v-model="txt"></textarea>
         </section>
         
         <section class="type-img" v-if="chosenType === 'img'">
             <input type="text" placeholder="Image URL" v-model="url">
             <input type="text" placeholder="title" v-model="title">
-            <input type="text" placeholder="txt" v-model="txt">
+            <textarea type="text" placeholder="txt" v-model="txt"></textarea>
         </section>
 
         <section class="type-video" v-if="chosenType === 'video'">
             <input type="text" placeholder="Video URL" v-model="url">
             <input type="text" placeholder="title" v-model="title">
-            <input type="text" placeholder="txt" v-model="txt">
+            <textarea type="text" placeholder="txt" v-model="txt"></textarea>
         </section>
         
         

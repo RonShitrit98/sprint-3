@@ -12,3 +12,15 @@ justify-content: space-between;
 .flex.justify-center{
 justify-content: center;
 }
+
+/* GRID ROWS SPANS */
+
+.span2{
+    grid-row: span 2;
+}
+.span3{
+    grid-row: span 3;
+}
+.span4{
+    grid-row: span 4;
+}

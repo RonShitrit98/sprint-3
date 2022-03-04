@@ -2,6 +2,7 @@ import { storageService } from '../../../services/async-storage.service.js';
 import { utilService } from '../../../services/util.service.js';
 
 const NOTES_KEY = 'notes';
+const PINNED_NOTES_KEY = 'pinnedNotes';
 _creatNotes()
 
 export const noteService = {
@@ -11,11 +12,11 @@ export const noteService = {
     getEmptyNote,
     save,
     getEmptyTodo,
-    duplicate
+    duplicate,
 
 }
 
-function duplicate(note){
+function duplicate(note) {
     return storageService.post(NOTES_KEY, note);
 }
 
@@ -118,7 +119,6 @@ function _creatNotes() {
                     style: 'none'
                 },
             ]
-
         utilService.saveToStorage(NOTES_KEY, notes);
         return notes;
     }

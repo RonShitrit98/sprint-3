@@ -4,7 +4,7 @@ export default {
     template: `
     <section class="note-video" @click="onEdit(cmp.id)">
     <label @click.stop="pinTheNote(cmp)">pin</label>| |
-        <label @click.stop="duplicateNote(cmp)">duplicate</label>
+        <label style="align-self: end;" @click.stop="duplicateNote(cmp)">duplicate</label>
         <img :src="cmp.info.url" alt="">
         <h1>{{cmp.info.title}}</h1>
         <h2>{{cmp.info.txt}}</h2>
