@@ -18,8 +18,8 @@ export default {
     `,
     data() {
         return {
-            removeImg: '../../img/mail-imgs/bin.png',
-            removeImgHover: '../../img/mail-imgs/bin-hover.png'
+            removeImg: './img/mail-imgs/bin.png',
+            removeImgHover: './img/mail-imgs/bin-hover.png'
         }
     },
     computed: {
@@ -39,8 +39,8 @@ export default {
             return `${months[date.getMonth()]} ${date.getDate()}`
         },
         starIcon() {
-            if (this.email.isStarred) return '../../../../img/mail-imgs/starred.png'
-            return '../../../../img/mail-imgs/notStarred.png'
+            if (this.email.isStarred) return './img/mail-imgs/starred.png'
+            return './img/mail-imgs/notStarred.png'
         }
     },
     methods: {
@@ -59,10 +59,10 @@ export default {
             this.$emit('update', this.email)
         },
         removeHover() {
-            this.removeImg = '../../img/mail-imgs/bin-hover.png'
+            this.removeImg = '../../../img/mail-imgs/bin-hover.png'
         },
         mouseLeft() {
-            this.removeImg = '../../img/mail-imgs/bin.png'
+            this.removeImg = '../../../img/mail-imgs/bin.png'
         }
     }
 
