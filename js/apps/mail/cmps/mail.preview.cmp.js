@@ -59,10 +59,10 @@ export default {
             this.$emit('update', this.email)
         },
         removeHover() {
-            this.removeImg = '../../../img/mail-imgs/bin-hover.png'
+            this.removeImg = './img/mail-imgs/bin-hover.png'
         },
         mouseLeft() {
-            this.removeImg = '../../../img/mail-imgs/bin.png'
+            this.removeImg = './img/mail-imgs/bin.png'
         }
     }
 
