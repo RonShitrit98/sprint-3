@@ -39,8 +39,8 @@ export default {
             return `${months[date.getMonth()]} ${date.getDate()}`
         },
         starIcon() {
-            if (this.email.isStarred) return '../../../../img/mail-imgs/starred.png'
-            return '../../../../img/mail-imgs/notStarred.png'
+            if (this.email.isStarred) return '../../../img/mail-imgs/starred.png'
+            return '../../../img/mail-imgs/notStarred.png'
         }
     },
     methods: {
