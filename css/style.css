@@ -35,6 +35,8 @@
 
 /* COMPONENTS */
 @import './apps/keep/components/keep-app.css';
+@import './apps/keep/components/add-note.css';
+@import './apps/keep/components/filter-note.css';
 @import './apps/keep/components/note-img.css';
 @import './apps/keep/components/note-txt.css';
 @import './apps/keep/components/note-video.css';

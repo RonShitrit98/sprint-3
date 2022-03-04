@@ -1,0 +1,28 @@
+.filter-notes{
+    display: flex;
+    width: 360px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.filter-notes input{
+    padding: 6px 10px;
+    flex-grow: 1;
+    margin: 0 10px;
+    margin-inline-end: 15px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.315);
+}
+
+.filter-notes input:focus{
+    outline: none;
+}
+
+.filter-notes select{
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.filter-notes select:focus{
+    outline: none;
+}

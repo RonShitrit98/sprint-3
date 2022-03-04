@@ -6,10 +6,16 @@ export default {
     template: `
     <section class="add-new-note">
         <div class="add-method" v-if="!chosenType">
-            <button @click="setType('img')">img</button>
-            <button @click="setType('video')">vid</button>
-            <button @click="setType('todos')">list</button>
             <input  type="text" placeholder="new note" @focus="setType('txt')">
+            <button @click="setType('img')">
+                <ion-icon name="image-outline"></ion-icon>
+            </button>
+            <button @click="setType('video')">
+                <ion-icon name="videocam-outline"></ion-icon>
+            </button>
+            <button @click="setType('todos')">
+                <ion-icon name="list-outline"></ion-icon>
+            </button>
         </div>
 
         <section class="type-txt" v-if="chosenType === 'txt'">

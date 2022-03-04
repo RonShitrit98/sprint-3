@@ -12,9 +12,12 @@ import filterNotes from '../cmps/filter-notes.cmp.js';
 export default {
     template: `
     <section class="keep-app keep-main-layout">
-        <add-note :notes="notes" @newNote="onAddNote" @adding="isFilter = !isFilter"/>
-    
-        <filter-notes v-if="isFilter" @filter="setFilter" />
+
+        <div class="search-container">
+            <add-note :notes="notes" @newNote="onAddNote" @adding="isFilter = !isFilter"/>
+        
+            <filter-notes v-if="isFilter" @filter="setFilter" />
+        </div>
 
         <section class="pinned-notes" v-if="pinnedNotes.length > 0">
                 <div v-for="note in pinnedNotes">
@@ -32,6 +35,7 @@ export default {
     </section>
 
     <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
+    
     </section>
 
         `,

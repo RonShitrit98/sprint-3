@@ -3,8 +3,9 @@ export default {
     template: `
     <section class="filter-notes">
 
-    <label for="type">Search: </label>
-        <input type="search" @input="onSearchNotes" v-model="searchBy">
+        <label for="type">Search: </label>
+        <input type="search" @input="onSearchNotes" v-model="searchBy" 
+        placeholder="Enter key words">
 
         <select class="type-filter" v-model="value" @change="onFilterNotes">
             <option value="">All</option>
@@ -18,9 +19,8 @@ export default {
     `,
     data() {
         return {
-            value:null,
+            value:'',
             searchBy: null
-
         }
     },
     methods: {
@@ -31,6 +31,6 @@ export default {
         onSearchNotes() {
             console.log(this.searchBy);
             this.$emit('filter', this.searchBy)
-        },
+        }
     }
 }
