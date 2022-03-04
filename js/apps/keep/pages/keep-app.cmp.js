@@ -1,3 +1,4 @@
+import { utilService } from '../../../services/util.service.js';
 import { noteService } from '../services/noteService.service.js';
 import noteTxt from '../cmps/note-txt-prev.cmp.js';
 import noteImg from '../cmps/note-img-prev.cmp.js';
@@ -6,7 +7,7 @@ import noteTodos from '../cmps/note-todos-prev.cmp.js';
 import editNote from '../cmps/edit-note.cmp.js';
 import addNote from '../cmps/add-note.cmp.js';
 import filterNotes from '../cmps/filter-notes.cmp.js';
-import { utilService } from '../../../services/util.service.js';
+// import colorPicker from '../cmps/color-picker.cmp.js';
 
 
 export default {
@@ -32,6 +33,8 @@ export default {
 
     <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
 
+    <!-- <color-picker v-if="isPick" @pickColor="isPick = !isPick" /> -->
+
         `,
     components: {
         noteTxt,
@@ -40,7 +43,8 @@ export default {
         noteTodos,
         editNote,
         addNote,
-        filterNotes
+        filterNotes,
+        // colorPicker
     },
     data() {
         return {
@@ -50,6 +54,7 @@ export default {
             isFilter: true,
             filterBy: null,
             pinnedNotes: [],
+            // isPick: null
         }
     },
     created() {

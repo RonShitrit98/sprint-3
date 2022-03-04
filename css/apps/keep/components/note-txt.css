@@ -1,0 +1,25 @@
+.note-txt .content-container{
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    margin-block-end: 1rem;
+}
+
+.content-container .note-txt-header{
+    display: flex;
+    justify-content: space-between;
+    padding-block-start: 0.3125rem;
+}
+
+.note-txt-header h1{
+    font-size: 1.15rem;
+    flex-grow: 1;
+    padding-inline-start: 0.625rem;
+}
+
+.content-container pre{
+    font-size: 0.875rem;
+}
+
+
+

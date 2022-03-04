@@ -113,7 +113,7 @@ function _creatNotes() {
                     isPinned: false,
                     info: {
                         title: 'Some video',
-                        url: '',
+                        url: 'https://www.youtube.com/embed?v=ShPPkZEeLPo',
                         txt: 'video txt'
                     },
                     style: 'none'

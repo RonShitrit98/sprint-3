@@ -1,17 +1,5 @@
-.note-img{
-    position: relative;
-    height: 100%;
-    
-}
-
 .note-img img{
     max-width: 100%;
-}
-
-.note-img .img-container{
-    max-width: 100%;
-    height: 150px;
-    background-size: cover;
     margin-block-end: 1rem;
 }
 
@@ -20,23 +8,11 @@
     margin-block-end: 1rem;
 }
 
-.content-container h1{
+.note-img .content-container h1{
     font-size: 1rem;
-    margin-block-end: 0.3125rem;
+    margin-block-end: 0.625rem;
 }
+
 .content-container p{
     font-size: 0.875rem;
-}
-
-.note-img .actions{
-    align-items: center;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 8px;
-    font-size: 1.25rem;
-}
-
-.actions label{
-    cursor: pointer;
 }

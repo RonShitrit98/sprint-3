@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -22,7 +22,7 @@ p {
   margin: 0px;
 }
 
-.none{
+.none {
   background-color: #ffffff;
 }
 
@@ -59,20 +59,66 @@ p {
 }
 
 .orange {
-  background-color: #fbbc04 ;
+  background-color: #fbbc04;
 }
 
 .red {
-  background-color: #f28b82 ;
+  background-color: #f28b82;
 }
 
 .turquoise {
   background-color: #a7ffeb;
 }
 
-.pin{
-  font-weight: bold;
+.pin {
+  cursor: pointer;
+}
+
+.note .actions {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px;
+  font-size: 1.25rem;
+}
+
+.actions label {
+  cursor: pointer;
+}
+
+.colors-container {
+  background-color: white;
+  z-index: 2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding: 15px;
+  border: 1px solid #00000033;
+  border-radius: 15px;
+  width: 454px;
+  height: 49px;
+  right: 40px;
+}
+
+.color{
+  display: inline;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0px 1px #00000042;
+}
+
+.color:hover{
+  cursor: pointer;
+  box-shadow: inset 0 0 0px 1px black;
+}
+
+.trying {
   position: absolute;
-    top: 15px;
-    left: 15px;
+  width: 25px;
+  margin: 10px;
 }

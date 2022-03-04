@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    /* width: max-content; */
     width: 400px;
     height: 32%;
     padding: 15px;
@@ -18,30 +17,4 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-}
-
-.colors-container{
-    background-color: white;
-    z-index: 2;
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    top: 15px;
-    padding: 15px;
-    width: 454px;
-    height: 49px;
-    right: 40px;
-}
-
-.color-picker{
-    display: inline;
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0px 1px #00000042;
-}
-
-.color-picker:hover{
-    cursor: pointer;
-    box-shadow: inset 0 0 0px 1px black;
 }

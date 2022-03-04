@@ -3,25 +3,57 @@ export default {
     emits: ['delete', 'edit', 'pin', 'duplicate', 'todoDone'],
     template: `
     <section :class="['note-todos', noteSpan]" @click="onEdit(cmp.id)">
-    <label @click.stop="pinTheNote(cmp)">pin</label>| |
-        <label style="align-self: end;" @click.stop="duplicateNote(cmp)">duplicate</label>
-        <h1>{{cmp.info.title}}</h1>
+
+    <div class="content-container">
+                <label class="pin-txt" @click.stop="pinTheNote(cmp)">
+                    <img v-if="!cmp.isPinned" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAaFJREFUSA1jZMAD/v//zwuU1gRiYRzK3gLFrzMyMn7GIc/AiEsCaLgRUK4MiEGW4AMgw7uAlpzDpgirBVCXz75z587nhMQUvqfPnvFg0ywtJfVl3txZn9TU1ECOSMXmEyZsGoFioGDhxWc4SB/I4qTkND6QWiAG6cEALBgiEAFwmMNcfv/uLazKFJXVwJZAJbHGEy4fYDWQHMFRCwiG2oAFETdBp2EqwKoHwwfATCYI1Bty8eLFJyAzWFlY/mGaBRGByUHVhkD1oijHsAAom/3r1y+WlNQMcLpubm54hKIDiQOTA6kF6QHpRZIGM1EsALrAFChq2djY9PbN27ecRgZ6b8NCQ+XQNcH4IDmQGpBakB6QXqgZMCWohR1Q0hMokwPKoeQAaI6fAiyTtsP0o/gAJkhNGmtZhK/sAVmOSx6bw9AtuApUNAWLQm2gmCOa+H4gH6QeHVxBFkCxABh2oBSDkWqAcQPSg27BVeSwRjYUmU3zOKC5BShBhOw1NPYHEL+zve0BVFwBSIPFoHzKKWA8hAPxVigOp9xELCZALSHJcADfepPyJOCCLQAAAABJRU5ErkJggg==">
+                    <img v-if="cmp.isPinned" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAY9JREFUSA1jZMAD/v//zwuU1gRiYRzK3gLFrzMyMn7GIc/AiEsCaLgRUK4MiEGW4AMgw7uAlpzDpgirBVCXz75z587nhMQUvqfPnvFg0ywtJfVl3txZn9TU1ECOSMXmEyZsGoFioGDhxWc4SB/I4qTkND6QWiAG6cEAuCwAhzkulyObgqQGazzhsgDZDIrYoxYQDL4BCyJugk7DVIBVD4YPgJlMEKg35OLFi08wzcAuAlUbAtWLoggjJwMV1fz69cvA2sae4c3bt5woqnFwRISFvx89cpCBjY3tAjA3tyArQ/EB0HBToKRlY2PTW2INBxkGUgvSA9ILNQMkDAYoPgBKegJFcxSV1aDSpFH3794CaZgC9MV2mE4UH8AEqUmzYDMM6hIMKZjPcMljaAAKoFtwFSg2BYtCbaCYI5r4fiAfpB4dXEEWQLEAGHaPgJIgjAKAcQPio1twFTmsUTQgcWgeBzS3ACWIkHyGzvwAEuhsb3sAlVAA0mAxKJ9yChgP4UC8FYrDKTcRiwlQS0gyHAB3MIqRQdyVIQAAAABJRU5ErkJggg==">
+                </label>        
+            
+                <h1>{{cmp.info.title}}</h1>
+        </div>
 
         <ul>
             <li v-for="todo in cmp.info.todos" @click.stop >
-                <label for="todo.id" :class="{done: todo.doneAt}">{{todo.txt}}</label>
                 <input type="checkbox" id="todo.id"  @click.stop @change="isDone(todo.id)"
                 v-if="todo.doneAt" checked>
                 <input type="checkbox" id="todo.id"  @click.stop @change="isDone(todo.id)"
                 v-if="!todo.doneAt">
+                <label for="todo.id" :class="{done: todo.doneAt}">{{todo.txt}}</label>
             </li>
         </ul>
 
-        <button @click.stop="onDeleteNote(cmp.id)">X</button>
+        <div class="actions">
+            <label @click.stop="copyNote(cmp)">
+                <ion-icon name="duplicate-outline"></ion-icon>
+            </label>
+            <label @click.stop="colorPicker = !colorPicker" @click.stop="setPos">         
+                <ion-icon name="color-palette-outline"></ion-icon>
+            </label>
+            <label @click.stop="onEdit(cmp.id)">         
+                <ion-icon name="create-outline"></ion-icon>
+            </label>
+
+            <label @click.stop="onDeleteNote(cmp.id)">
+                <ion-icon name="trash-outline"></ion-icon>
+            </label>
+        </div>
+
+        <div class="colors-container" v-if="colorPicker" :style="{position: 'absolute', top: yPos + 15 + 'px', left: xPos - 115 + 'px'}">
+            <div class="color" v-for="color in colors" :class="color" 
+            @click.stop="onSetColor(color)"></div>
+        </div>
+
     </section>
     `,
     data() {
-        return {}
+        return {
+            colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
+                'green', 'yellow', 'orange', 'red', 'none'],
+            colorPicker: false,
+            xPos: null,
+            yPos: null
+        }
     },
     methods: {
         onDeleteNote(id) {
@@ -33,12 +65,20 @@ export default {
         pinTheNote(note) {
             this.$emit('pin', { ...note })
         },
-        duplicateNote(note) {
+        copyNote(note) {
             this.$emit('duplicate', { ...note })
         },
         isDone(todoId) {
             this.$emit('todoDone', todoId)
         },
+        onSetColor(color) {
+            this.cmp.style = color;
+            this.$emit('color', { ...this.cmp });
+        },
+        setPos(ev){
+            this.xPos = (ev.clientX >= 745) ? ev.clientX -150 : ev.clientX;
+            this.yPos = ev.clientY
+        }
     },
     computed: {
         noteSpan() {
@@ -46,8 +86,6 @@ export default {
             else if (this.cmp.info.todos.length > 2 &&
                 this.cmp.info.todos.length <= 5) return 'span3';
             else return 'span4'
-            // else if (this.cmp.info.todos.length > 5 &&
-            //     this.cmp.info.todos.length <= 5) return 'span4';
         }
     }
 }
