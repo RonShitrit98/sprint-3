@@ -8,6 +8,11 @@
     font-family: roboto-reg;
 }
 .mail-search input:focus{
-    outline: none;
-   
+    outline: none;   
+}
+
+.mail-search select{
+border: none;
+margin-left: 20px;
+align-self: center;
 }

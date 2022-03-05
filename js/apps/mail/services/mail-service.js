@@ -6,49 +6,59 @@ export const mailService = {
     updateEmail,
     newEmail,
     remove,
-    filter
+    filter,
+    getUser
 }
 
-const STORAGE_KEY = 'emailsDB'
+const MAIL_KEY = 'emailsDB'
+const USER_KEY = 'usersDB'
 _createEmails()
+_createUser()
 
 function query() {
-    return storageService.query(STORAGE_KEY);
+    return storageService.query(MAIL_KEY);
+}
+function getUser() {
+    return storageService.query(USER_KEY);
 }
 
 function get(id) {
-    return storageService.get(STORAGE_KEY, id);
+    return storageService.get(MAIL_KEY, id);
 }
 
 function updateEmail(email) {
-    return storageService.put(STORAGE_KEY, email)
+    return storageService.put(MAIL_KEY, email)
 }
 
 function remove(id) {
-    return storageService.remove(STORAGE_KEY, id)
+    return storageService.remove(MAIL_KEY, id)
 }
 
 function newEmail(email) {
-    const newEmail = {
-        id: _makeId(),
-        subject: email.subject,
-        body: email.body,
-        isRead: false,
-        isStarred: false,
-        sentAt: Date.now(),
-        to: email.to,
-        from: {
-            name: 'momo',
-            address: 'momo@momo.com'
-        }
+    return storageService.query(USER_KEY)
+        .then(user => {
+            // console.log(user[0])
+            const newEmail = {
+                id: _makeId(),
+                subject: email.subject,
+                body: email.body,
+                isRead: false,
+                isStarred: false,
+                sentAt: Date.now(),
+                to: email.to,
+                from: {
+                    name: user[0].name,
+                    address: user[0].email
+                }
+            }
+            return storageService.post(MAIL_KEY, newEmail)
+        })
     }
-    return storageService.post(STORAGE_KEY, newEmail)
-}
 
 function filter(emails, userEmail, filterBy) {
     var filteredEmails = emails
     if (filterBy.mailBox === 'sent') filteredEmails = emails.filter(email => email.from.address === userEmail)
-    else if(filterBy.mailBox === 'star') filteredEmails = emails.filter(email => email.isStarred)
+    else if (filterBy.mailBox === 'star') filteredEmails = emails.filter(email => email.isStarred)
     else filteredEmails = emails.filter(email => email.to === userEmail)
     var displayEmails = filteredEmails
 
@@ -64,7 +74,7 @@ function filter(emails, userEmail, filterBy) {
 }
 
 function _createEmails() {
-    storageService.query(STORAGE_KEY)
+    storageService.query(MAIL_KEY)
         .then(emails => {
             if (!emails || !emails.length) {
                 emails = [{
@@ -398,11 +408,24 @@ function _createEmails() {
                         address: 'bee@gees.com'
                     }
                 }]
-                storageService.postMany(STORAGE_KEY, emails);
+                storageService.postMany(MAIL_KEY, emails);
             }
         })
 
 }
+function _createUser() {
+    storageService.query(USER_KEY)
+        .then(user => {
+            if (!user || !user.length) {
+                user = {
+                    email: 'momo@momo.com',
+                    name: 'momo'
+                }
+                storageService.post(USER_KEY, user);
+            }
+        })
+}
+
 
 function _makeId(length = 8) {
     var text = "";
