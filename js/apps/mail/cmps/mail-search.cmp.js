@@ -4,7 +4,7 @@ export default {
     <section class="mail-search flex space-between">
         <!-- <form @action.prevent> -->
             <div>
-                <input @input="search" v-model="searchBy" type="text"/>
+                <input @input="search" v-model="searchBy" type="text" placeholder="Search..."/>
                 <select v-model="filterRead" @change="filterByRead">
                     <option value="all">All</option>
                     <option value="unread">Unread</option>
