@@ -1,7 +1,7 @@
 export default {
     props: ['txt'],
     template: `
-    <p><span>Description:</span>{{txtToShow}}</p>
+    <p><span>Description: </span>{{txtToShow}}</p>
     <button @click="toggleMoreLess" class="btn show-more-btn">{{moreOrLess}}</button>
     `,
     data() {
@@ -18,8 +18,6 @@ export default {
     },
     computed: {
         txtToShow() {
-            // console.log(this.numWords);
-            // console.log(this.numWords.concat());
             if (this.showMore) return this.txt;
             else {
                 var str = '';

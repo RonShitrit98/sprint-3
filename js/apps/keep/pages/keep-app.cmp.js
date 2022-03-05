@@ -12,6 +12,7 @@ import filterNotes from '../cmps/filter-notes.cmp.js';
 
 export default {
     template: `
+    <div class="background">
     <section :class="['keep-app', 'keep-main-layout', screenToggel]">
 
         <div class="main-screen"></div>
@@ -40,6 +41,7 @@ export default {
     <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor" @screen="toggelScreen"/>
     
     </section>
+    </div>
 
         `,
     components: {

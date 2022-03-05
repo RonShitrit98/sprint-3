@@ -5,15 +5,19 @@ export default {
     props: ['books'],
     emits: ['newBook'],
     template: `
-    <input type="text" placeholder="Search new book" v-model="searchKeyWord" @input="onShowList">
-    <!-- <button @click="showList">Search</button> -->
-
-    <ul class="new-book-add-list">
-        <li v-for="book in booksList" :key="book.id">
-            {{book.title}}
-            <button @click="onAddNewBook(book.id)">+</button>
-        </li>
-    </ul>
+    <section class="book-add">
+        <input type="text" placeholder="Search new book" v-model="searchKeyWord" @input="onShowList">
+        <!-- <button @click="showList">Search</button> -->
+    
+        <ul class="new-book-add-list">
+            <li v-for="book in booksList" :key="book.id">
+                {{book.title}}
+                <button @click="onAddNewBook(book.id)">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                </button>
+            </li>
+        </ul>
+    </section>
     `,
     components: {},
     data() {

@@ -5,29 +5,33 @@ import { eventBus } from '../../../services/eventBus.service.js';
 export default {
     props: ['book'],
     template: `
+    <section class="review-add">
     <form>
-        <label for="reader-name">Name: </label>
-        <input type="text" v-model="review.name" id="reader-name" placeholder="Reader Name">
-        
+        <label for="reader-name">Name: 
+            <input type="text" v-model="review.name" id="reader-name" placeholder="Reader Name">
+        </label>
         <div class="selection">
-            <label for="rate-selection">Rate: </label>
-            <select id="rate-selection" class="rate-selection" v-model="review.rate">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-    
-            <label for="read-at">Read at: </label>
-            <input type="date" id="read-at" v-model="review.date">
+            <label for="rate-selection">Rate: 
+                <select id="rate-selection" class="rate-selection" v-model="review.rate">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </label>
+            
+            <label for="read-at">Read at: 
+                <input type="date" id="read-at" v-model="review.date">
+            </label>
         </div>
         
         <label for="review">What do you think about the book?</label>
         <textarea id="review" cols="30" rows="10" v-model="review.txt" placeholder="Write here"></textarea>
 
-        <button @click.prevent="onAddReview">Add review</button>
     </form>
+    <button @click.prevent="onAddReview">Add review</button>
+    </section>
     `,
     created() { },
     data() {

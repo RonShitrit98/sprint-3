@@ -1,7 +1,26 @@
 .book-list ul {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 15px;
   display: flex;
-  flex-wrap: wrap;
+}
+
+li a {
+  text-decoration: none;
+  color: black;
+}
+
+li .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  height: 60px;
+  width: 70px;
+}
+
+li .actions:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--bookclr);
 }

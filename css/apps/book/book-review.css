@@ -1,0 +1,45 @@
+.review{
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+}
+
+.reader-dets{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.reader-dets > h5:first-of-type{
+    margin-block-end: 2px;
+    text-decoration: underline;
+}
+
+.reader-dets h6{
+    margin-block-end: 8px;
+    font-weight: normal;
+}
+
+.reader-dets h5:last-child{
+    align-self: flex-end;
+    margin-inline-end: 15px;
+}
+
+.review button{
+    border: none;
+    background-color: inherit;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 65px;
+    margin-block-end: 10px;
+    align-self: center;
+}
+
+.review button:hover{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--bookclr);
+}

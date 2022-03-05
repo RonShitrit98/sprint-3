@@ -1,0 +1,42 @@
+.book-add {
+  text-align: center;
+}
+
+.book-add input {
+  margin-inline-start: 7px;
+  border: none;
+  border-bottom: 1px solid #80808070;
+  padding: 3px;
+}
+
+.book-add input:focus {
+  outline: none;
+}
+
+.book-add ul {
+  list-style: none;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-add li button {
+  border: none;
+  background-color: inherit;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-inline-start: 5px;
+}
+
+.book-add li button:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--bookclr);
+}
