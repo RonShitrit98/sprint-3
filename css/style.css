@@ -26,6 +26,13 @@
 
 /* COMPONENTS */
 
+/* BOOKS */
+@import './apps/book/app-footer.css';
+@import './apps/book/book-details.css';
+@import './apps/book/book-filter.css';
+@import './apps/book/book-list.css';
+@import './apps/book/book-preview.css';
+@import './apps/book/books-app.css';
 
 /* KEEP */
 

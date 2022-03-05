@@ -131,3 +131,26 @@ textarea {
 .success {
   background-color: lightgreen;
 }
+
+img {
+  max-height: 300px;
+}
+
+p {
+  margin-block-end: 7px;
+}
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.high-price {
+  color: red;
+}
+
+.low-price {
+  color: rgb(21, 192, 21);
+}
