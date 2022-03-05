@@ -19,51 +19,59 @@ export default {
             </button>
         </div>
 
-        <section class="type-txt" v-if="chosenType === 'txt'">
+        <section :class="['type-txt', 'clean-input', chosenColor]" v-if="chosenType === 'txt'">
             <input type="text" placeholder="title" v-model="title">
             <textarea type="text" placeholder="txt" v-model="txt"></textarea>
         </section>
-        
-        <section class="type-img" v-if="chosenType === 'img'">
+
+        <section :class="['type-img', 'clean-input', chosenColor]" v-if="chosenType === 'img'">
             <input type="text" placeholder="Image URL" v-model="url">
             <input type="text" placeholder="title" v-model="title">
             <textarea type="text" placeholder="txt" v-model="txt"></textarea>
         </section>
 
-        <section class="type-video" v-if="chosenType === 'video'">
+        <section :class="['type-video', 'clean-input', chosenColor]" v-if="chosenType === 'video'">
             <input type="text" placeholder="Video URL" v-model="url">
             <input type="text" placeholder="title" v-model="title">
             <textarea type="text" placeholder="txt" v-model="txt"></textarea>
         </section>
         
         
-        <section class="type-todos" v-if="chosenType === 'todos'">
-            <input type="text" placeholder="title" v-model="title">
-            <input type="text" placeholder="Todo" v-model="txt">
-            <button @click="newTodo">Add Todo</button>
+        <section :class="['type-todos', 'clean-input', chosenColor]" v-if="chosenType === 'todos'" >
+            <div class="todos-input">
+                <input type="text" placeholder="title" v-model="title">
+                <input type="text" placeholder="Todo" v-model="txt">
+                <button @click="newTodo">Add Todo</button>
+            </div>
 
-        <div class="add-todo" v-if="todos.length !== 0" v-for="todo in todos">
-            <button @click="onDeleteTodo(todo.id)">x</button>
-            <input type="text" placeholder="note" v-model="todo.txt">
-            <input type="checkbox" @change="isDone(todo.id)" >
-        </div>
+            <div class="new-todos-container">
+                <div class="add-todo" v-if="todos.length !== 0" v-for="todo in todos">
+                    <button @click="onDeleteTodo(todo.id)">x</button>
+                    <input type="text" placeholder="note" v-model="todo.txt">
+                    <input type="checkbox" @change="isDone(todo.id)" >
+                </div>
+            </div>
         </section>
 
 
-        <button @click="colorPicker = !colorPicker" v-if="chosenType">color picker</button>
-        <div class="colors-container" v-if="colorPicker">
-            <div class="color-picker" v-for="color in colors" :class="color" 
-            @click="onSetColor(color)"></div>
+        <div class="new-note-actions">
+            <button @click.stop="colorPicker = !colorPicker; setPos($event)" v-if="chosenType">
+                <ion-icon name="color-palette-outline"></ion-icon>
+            </button>
+            <div class="colors-container" v-if="colorPicker" :style="{position: 'absolute', top: yPos*1.35 + 'px', left: xPos/1.6 + 'px'}">
+                <div class="color" v-for="color in colors" :class="color" 
+                @click="onSetColor(color)"></div>
+            </div>
+    
+            <button v-if="chosenType" @click="addNewNote">Add Note</button>
         </div>
-
-        <button v-if="chosenType" @click="addNewNote">Add Note</button>
 
     </section>
     `,
     data() {
         return {
             chosenType: null,
-            chosenColor: null,
+            chosenColor: '',
             colorPicker: false,
             colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
                 'green', 'yellow', 'orange', 'red', 'none'],
@@ -71,12 +79,13 @@ export default {
             title: null,
             url: null,
             todos: [],
+            xPos: null,
+            yPos: null,
 
         }
     },
     methods: {
         setType(type) {
-            console.log('working');
             this.chosenType = type;
             this.$emit('adding')
         },
@@ -98,18 +107,18 @@ export default {
             this.txt = null;
             this.url = null;
             this.todos = [];
+            this.chosenColor = '';
             this.chosenType = null;
+            this.colorPicker = false;
             this.$emit('adding')
         },
         onSetColor(color) {
             console.log('color');
             this.chosenColor = color;
-            // this.$emit('color', { ...this.note })
         },
         newTodo() {
             const todo = noteService.getEmptyTodo();
             todo.txt = this.txt;
-            // this.isDone ? todo.doneAt = Date.now() : null;
             this.todos.unshift(todo);
             console.log(this.todos);
             this.txt = '';
@@ -130,6 +139,10 @@ export default {
             });
             console.log(this.todos);
         },
-    },
-    computed: {}
+        setPos(ev) {
+            console.log('llll');
+            this.xPos = ev.clientX
+            this.yPos = ev.clientY
+        },
+    }
 }

@@ -1,33 +1,161 @@
 .add-method {
-    margin: 18px auto;
-    width: 550px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 3px 0px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px 1px #00000042;
-  }
-  
-  .add-method input {
-    border: none;
-    padding: 10px;
-    flex-grow: 0.6;
-  }
-  
-  .add-method button {
-    border: none;
+  margin: 18px auto;
+  width: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 3px 0px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px 1px #00000042;
+}
+
+.add-method input {
+  border: none;
+  padding: 10px;
+  flex-grow: 0.6;
+}
+
+.add-method button {
+  border: none;
+  background-color: inherit;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.add-method button:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--noteclr);
+}
+
+.add-new-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0 20px;
+  height: fit-content;
+  width: 100%;
+}
+
+.clean-input input,
+.clean-input textarea {
+  border: none;
+  background-color: inherit;
+  border-bottom: 1px solid #80808070;
+}
+
+.add-new-note input:focus,
+.add-new-note textarea:focus {
+  outline: none;
+}
+
+.new-note-actions {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.new-note-actions>:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.new-note-actions button {
+  /* padding: 5px; */
+  border: 1px solid #80808046;
+  background-color: inherit;
+  height: 75px;
+  width: 75px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.new-note-actions button:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--noteclr);
+}
+
+.add-new-note .type-txt {
+  display: flex;
+  justify-content: space-around;
+  height: 45px;
+  width: 75%;
+  box-shadow: 0px 3px 8px 1px #0000002b;
+  padding: 10px;
+  margin-block-end: 15px;
+}
+
+.add-new-note .type-img,
+.add-new-note .type-video {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  width: 75%;
+  box-shadow: 0px 3px 8px 1px #0000002b;
+  padding: 10px;
+  margin-block-end: 15px;
+}
+
+.type-img > *:not(:last-child),
+.type-video > *:not(:last-child) {
+  padding: 5px;
+}
+
+.add-new-note .type-todos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: fit-content;
+  width: fit-content;
+  box-shadow: 0px 3px 8px 1px #0000002b;
+  padding: 10px;
+  margin-block-end: 15px;
+}
+
+.type-todos .todos-input{
+  display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    margin-inline-end: 10px;
+    margin: 10px;
+}
+
+.todos-input input{
+  margin-block-end: 10px;
+}
+
+.todos-input button{
+  border: none;
     background-color: inherit;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
+    align-self: center;
+    height: 65px;
+}
+
+.todos-input button:hover{
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--noteclr);
+}
+
+.type-todos .new-todos-container{
+  display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+.type-todos .add-todo{
+  display: flex;
+    justify-content: space-between;
     align-items: center;
-    width: 40px;
-    height: 40px;
-  }
-  
-  .add-method button:hover {
-    cursor: pointer;
-    border-radius: 50%;
-    background-color: var(--noteclr);
-  }
+}

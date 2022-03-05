@@ -1,22 +1,18 @@
-import {eventBus} from '../../../services/eventBus.service.js';
+import { eventBus } from '../../../services/eventBus.service.js';
 import editTxt from './edit-txt.cmp.js';
 import editImg from './edit-img.cmp.js';
 import editVid from './edit-vid.cmp.js';
 import editTodos from './edit-todos.cmp.js';
-import editActions from './edit-actions.cmp.js';
 
 export default {
     props: ['note'],
     emits: ['close', 'color'],
     template: `
     <section :class="[note.style, 'edit-note']">
-        <edit-txt v-if="isTypeTxt" @close="close" :note="note"/>
-        <edit-img v-if="isTypeImg" @close="close" :note="note"/>
-        <edit-vid v-if="isTypeVid" @close="close" :note="note"/>
-        <edit-todos v-if="isTypeTodo" @close="close" :note="note"/>
-
-        <edit-actions :colors="colors" :note="note" @colorPicked="onSetColor"/>
-
+        <edit-txt v-if="isTypeTxt" @close="close" :note="note" @color="onSetColor"/>
+        <edit-img v-if="isTypeImg" @close="close" :note="note" @color="onSetColor"/>
+        <edit-vid v-if="isTypeVid" @close="close" :note="note" @color="onSetColor"/>
+        <edit-todos v-if="isTypeTodo" @close="close" :note="note" @color="onSetColor"/>
 
         <!-- <div class="edit-actions">
             <button @click="close">
@@ -39,19 +35,19 @@ export default {
         editTxt,
         editImg,
         editVid,
-        editTodos,
-        editActions
+        editTodos
     },
     data() {
         return {
             title: this.note.info.title,
             txt: this.note.info.txt,
             bgColor: null,
-            colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
-                'green', 'yellow', 'orange', 'red', 'none'],
+            // colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
+            //     'green', 'yellow', 'orange', 'red', 'none'],
             // colorPicker: false,
-            // xPos: null,
-            // yPos: null
+            xPos: null,
+            yPos: null,
+            doItNow: null
         }
     },
     methods: {

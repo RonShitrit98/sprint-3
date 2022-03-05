@@ -1,12 +1,12 @@
-export default{
-    props:['colors', 'note'],
-    template:`
+export default {
+    props: ['colors', 'note'],
+    template: `
      <div class="edit-actions">
-            <button @click="close">
+            <button @click="onClose">
                 <ion-icon name="close-circle-outline"></ion-icon>
             </button>
 
-            <label @click.stop="colorPicker = !colorPicker" @click.stop="setPos">         
+            <label @click.stop="colorPicker = !colorPicker; setPos()" >         
                 <ion-icon name="color-palette-outline"></ion-icon>
             </label>
 
@@ -16,11 +16,26 @@ export default{
             </div>
         </div>
     `,
-    data(){
+    data() {
         return {
+            colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
+                'green', 'yellow', 'orange', 'red', 'none'],
+            colorPicker: false,
             colorPicker: false,
             xPos: null,
-            yPos: null
+            yPos: null,
         }
     },
+    methods: {
+        onClose() {
+            this.$emit('close')
+        },
+        setPos(ev) {
+            this.xPos = ev.clientX
+            this.yPos = ev.clientY
+        },
+        onSetColor(color){
+            this.$emit('color', color)
+        }
+    }
 }
