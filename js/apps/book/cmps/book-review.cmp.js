@@ -4,18 +4,19 @@ export default {
     <section class="review">
 
         <div class="reader-dets">
-            <button @click="remove(review.id)">delete</button>
-            <h5 class="reader-name">{{review.name}}</h5>
-            <h6>{{review.rate}}</h6>
+            <h5 class="reader-name">Name: {{review.name}}</h5>
+            <h6>Rate: {{review.rate}}</h6>
+            
+            <p class="review-txt">
+                {{review.txt}}
+            </p>
+            
+            <h5 class="review-date">
+                {{review.date}}
+            </h5>
         </div>
-        
-        <p class="review-txt">
-            {{review.txt}}
-        </p>
-        
-        <h5 class="review-date">
-            {{review.date}}
-        </h5>
+
+        <button @click="remove(review.id)">delete</button>
         
     </section>
     `,

@@ -6,11 +6,13 @@ import bookAdd from '../cmps/book-add.cmp.js';
 
 export default {
     template: `
-    <section class='books-app'>
-        <book-filter @filtered='setFilter' />
-        <book-Add :books="books" @newBook="addNewBook"></book-Add>
-        <book-list :books='booksForDisplay' />
-    </section>
+        <div class="background">
+    <section class='books-app books-main-layout'>
+            <book-filter @filtered='setFilter' />
+            <book-Add :books="books" @newBook="addNewBook"></book-Add>
+            <book-list :books='booksForDisplay' />
+        </section>
+    </div>
     `,
     components: {
         bookList,

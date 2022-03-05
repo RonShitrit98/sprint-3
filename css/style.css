@@ -9,6 +9,7 @@
 @import './basic/layout.css';
 
 /* COMPONENTS */
+@import './components/home-page.css';
 @import './components/app-header.css';
 @import './components/app-footer.css';
 @import './components/user-msg.css';
@@ -21,24 +22,23 @@
 @import './apps/mail/components/mail-search.css';
 @import './apps/mail/components/mail-add.css';
 @import './apps/mail/components/mail-details.css';
-/* SETUP */
 
-/* BASIC */
 
-/* COMPONENTS */
 
 /* BOOKS */
+@import './apps/book/book-mq.css';
 @import './apps/book/app-footer.css';
 @import './apps/book/book-details.css';
 @import './apps/book/book-filter.css';
 @import './apps/book/book-list.css';
 @import './apps/book/book-preview.css';
 @import './apps/book/books-app.css';
+@import './apps/book/book-add.css';
+@import './apps/book/review-add.css';
+@import './apps/book/book-review.css';
+
 
 /* KEEP */
-
-/* SETUP */
-
 /* BASIC */
 @import './apps/keep/basic/keep-main-layout.css';
 @import './apps/keep/basic/keep-mq.css';

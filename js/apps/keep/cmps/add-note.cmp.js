@@ -6,7 +6,7 @@ export default {
     emits: ['newNote', 'adding'],
     template: `
     <section class="add-new-note">
-        <div class="add-method" v-if="!chosenType">
+        <div class="add-method keep-main-layout" v-if="!chosenType">
             <input  type="text" placeholder="new note" @focus="setType('txt')">
             <button @click="setType('img')">
                 <ion-icon name="image-outline"></ion-icon>

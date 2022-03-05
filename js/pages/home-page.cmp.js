@@ -1,8 +1,9 @@
 export default {
     template: `
 
-    <section class="home-page main-layout">
-        <h2>Home!</h2>
+    <section class="home-page">
+        <div></div>
+        <h2>The Next Generation</h2>
 
     </section>
     `

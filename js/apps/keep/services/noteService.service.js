@@ -82,9 +82,19 @@ function _creatNotes() {
                     },
                     style: 'green'
                 },
-
                 {
                     id: 'n102',
+                    type: 'note-txt',
+                    isPinned: false,
+                    info: {
+                        title: 'text',
+                        txt: 'Fullstack me baby!'
+                    },
+                    style: 'purple'
+                },
+
+                {
+                    id: 'n103',
                     type: 'note-img',
                     isPinned: false,
                     info: {
@@ -92,23 +102,47 @@ function _creatNotes() {
                         title: 'Some image',
                         txt: 'img txt'
                     },
-                    style: 'none'
+                    style: 'blue'
                 },
                 {
-                    id: 'n103',
+                    id: 'n104',
+                    type: 'note-img',
+                    isPinned: false,
+                    info: {
+                        url: 'https://upload.wikimedia.org/wikipedia/commons/9/99/SOME_LIKE_IT_HOT_TITLE.jpg',
+                        title: 'Some image',
+                        txt: 'img txt'
+                    },
+                    style: 'brown'
+                },
+                {
+                    id: 'n105',
                     type: 'note-todos',
                     isPinned: false,
                     info: {
                         title: 'Get my stuff together!',
                         todos: [
-                            { txt: 'Show the cmp', doneAt: null, id: utilService.makeId() },
-                            { txt: 'Coding power', doneAt: null, id: utilService.makeId() },
+                            { txt: 'Drink coffee with Yaron', doneAt: null, id: utilService.makeId() },
+                            { txt: 'To buy more ice cream!', doneAt: null, id: utilService.makeId() },
                         ]
                     },
-                    style: 'none'
+                    style: 'red'
                 },
                 {
-                    id: 'n104',
+                    id: 'n106',
+                    type: 'note-todos',
+                    isPinned: false,
+                    info: {
+                        title: 'Get my stuff together!',
+                        todos: [
+                            { txt: 'To build many applications', doneAt: null, id: utilService.makeId() },
+                            { txt: 'To sleep', doneAt: null, id: utilService.makeId() },
+                        ]
+                    },
+                    style: 'turquoise'
+                },
+                {
+                    id: 'n107',
                     type: 'note-video',
                     isPinned: false,
                     info: {
@@ -116,7 +150,7 @@ function _creatNotes() {
                         url: 'https://www.youtube.com/embed?v=ShPPkZEeLPo',
                         txt: 'video txt'
                     },
-                    style: 'none'
+                    style: 'dark-blue'
                 },
             ]
         utilService.saveToStorage(NOTES_KEY, notes);

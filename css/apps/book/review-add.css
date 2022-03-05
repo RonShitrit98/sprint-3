@@ -1,0 +1,56 @@
+.review-add{
+    display: flex;
+    margin: 0 auto;
+}
+
+.review-add form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 140px 10px;
+}
+
+label > input[type="text"] {
+  margin-inline-start: 7px;
+  border: none;
+  border-bottom: 1px solid #80808070;
+  padding: 3px;
+}
+
+form > * input:focus,
+form > textarea:focus {
+  outline: none;
+}
+
+.review-add label {
+  margin-block-end: 10px;
+}
+
+form textarea {
+  padding: 10px;
+  margin-block-end: 5px;
+}
+.review-add .selection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-add button{
+    border: none;
+  background-color: inherit;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 65px;
+  margin-block-end: 10px;
+  align-self: center;
+}
+
+.review-add button:hover{
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--bookclr);
+}

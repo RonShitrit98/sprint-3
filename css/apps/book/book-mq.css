@@ -1,0 +1,39 @@
+/* MOBILE */
+@media (max-width: 520px) {
+  .books-main-layout {
+    max-width: 350px;
+  }
+
+  .book-list ul {
+    flex-direction: column;
+  }
+}
+
+/* MEDIUM */
+@media (min-width: 520px) {
+  .books-main-layout {
+    max-width: 470px;
+  }
+  .book-list ul {
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 770px) {
+  .books-main-layout {
+    max-width: 690px;
+  }
+}
+
+@media (min-width: 1090px) {
+  .books-main-layout {
+    max-width: 1130px;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1300px) {
+  .books-main-layout {
+    max-width: 1340px;
+  }
+}

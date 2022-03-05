@@ -1,11 +1,31 @@
 .book-preview-container {
-  padding: 10px;
+  padding: 15px 10px;
   margin: 10px;
-  width: 150px;
-  height: 120px;
-  background-color: lightgoldenrodyellow;
+  width: 200px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   border-radius: 10px;
+  text-align: center;
+  border: 1px solid #80808054;
+  transition: box-shadow 0.2s;
+}
+
+.book-preview-container:hover {
+  box-shadow: 0px 2px 4px 1px #00000049;
+}
+
+.book-preview img{
+  max-height: 200px;
+  margin-block-end: 5px;
+}
+
+.book-preview h4{
+  font-size: 1rem;
+  margin-block-end: 8px;
+}
+
+.book-preview p{
+  font-size: 0.9rem;
 }

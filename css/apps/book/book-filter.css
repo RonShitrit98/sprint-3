@@ -1,6 +1,38 @@
 .book-filter {
-  margin: 15px auto 10px;
+  margin: 15px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 90%;
+  box-shadow: 0px 2px 5px 1px #00000042;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.book-filter input {
+  margin-inline-start: 7px;
+  border: none;
+  border-bottom: 1px solid #80808070;
+  padding: 2px;
+}
+
+.book-filter input:focus {
+  outline: none;
+}
+
+.book-filter button {
+  border: none;
+  background-color: inherit;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+}
+
+.book-filter button:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--bookclr);
 }

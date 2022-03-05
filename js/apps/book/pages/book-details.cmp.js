@@ -6,25 +6,29 @@ import bookReview from "../cmps/book-review.cmp.js";
 
 export default {
     template: `
+    <section class="details-main-container">
     <section v-if="book" class="book-details-container">
+        <img :src="book.thumbnail" class="book-img">
+
         <div class="book-dets">
             <h2>{{book.title}}</h2>
             <h3>{{book.subtitle}}</h3>
 
-            <p class="book-authors"><span>Authors:</span> {{book.authors[0]}}</p>
-            <p><span>Published:</span>{{whenPublished}}</p>
-            <p><span>Read type:</span>{{readType}}</p>
+            <p class="book-authors"><span>Authors: </span> {{book.authors[0]}}</p>
+            <p><span>Published: </span>{{whenPublished}}</p>
+            <p><span>Read type: </span>{{readType}}</p>
 
             <long-text :txt="book.description" />
 
-            <h5 :class="priceColor"><span>Price:</span> {{formatedPrice}}</h5>
+            <h5 :class="priceColor"><span>Price: </span> {{formatedPrice}}</h5>
 
-            <router-link :to="'/books/'+book.prevBookId">Prev Book</router-link>
-            <router-link :to="'/books/'+book.nextBookId">Next Book</router-link>
-            <router-link to="/books">Back</router-link>
+            <div class="books-navigation">
+                <router-link :to="'/books/'+book.prevBookId">Prev Book</router-link>
+                <router-link to="/books">Back to list</router-link>
+                <router-link :to="'/books/'+book.nextBookId">Next Book</router-link>
+            </div>
         </div>
 
-        <img :src="book.thumbnail" class="book-img">
 
     </section>
 
@@ -39,6 +43,7 @@ export default {
                 </li>
             </ul>
         </div>
+    </section>
     </section>
     `,
     data() {

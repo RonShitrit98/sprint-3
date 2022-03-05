@@ -1,12 +1,12 @@
 export default {
     props: [''],
     template: `
-    <section class="book-filter">
-        <label for="search-by-name">
-            <input type="text" v-model="filterBy.name" placeholder="book name">
+    <section class="book-filter books-main-layout">
+        <label for="search-by-name">Search:
+            <input type="text" v-model="filterBy.name" placeholder="by name">
         </label>
-        <label for="search-by-price">
-            <input type="number" v-model="filterBy.fromPrice" placeholder="book price">
+        <label for="search-by-price">Price:
+            <input type="number" v-model="filterBy.fromPrice">
         </label>
         <button @click="setFilter" class="btn">Search</button>
     </section>

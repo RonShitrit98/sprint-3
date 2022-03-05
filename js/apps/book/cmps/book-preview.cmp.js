@@ -2,7 +2,8 @@ export default {
     props: ['book'],
     template: `
     <section class="book-preview">
-        <p>Name: {{book.title}}</p>
+        <img :src="book.thumbnail" alt="">
+        <h4>{{book.title}}</h4>
         <p>Price: {{formatedPrice}}</p>
     </section>
     `,
