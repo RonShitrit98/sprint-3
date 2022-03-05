@@ -2,22 +2,26 @@ import { mailService } from '../services/mail-service.js'
 export default {
     props: ['emails'],
     template: `
-        <div>
+        <div class="mail-add">
+            <div class="message-title">
+                <p>New Message</p>
+                <label @click="close">X</label>
+            </div>
             <form> 
-                <div><input v-model="email.to" type="text"/></div>
-                <div><input v-model="email.subject" type="text"/></div>
-                <div><input v-model="email.body" type="text" class="new-email-body"/></div> 
-                <input @click.prevent="sendEmail" type="submit">
+                <input class="new-mail-to" v-model="email.to" type="text" placeholder="To"/>
+                <input class="new-mail-subject" v-model="email.subject" type="text" placeholder="Subject"/>
+                <textarea class="new-mail-body" v-model="email.body" type="text"></textarea>
+                <input class="send-mail-btn" @click.prevent="sendEmail" type="submit">
             </form>
         </div>
 `,
     data() {
-        return{
+        return {
             email: {
-               to: null,
-               subject: null,
-               body: null,
-               id: null
+                to: null,
+                subject: null,
+                body: null,
+                id: null
             }
         }
     },
@@ -25,15 +29,17 @@ export default {
         newEmail() {
             this.$emit('newEmail')
         },
-        sendEmail(){
+        sendEmail() {
             mailService.newEmail(this.email)
-            .then((email)=>{
-                this.$emit('emailSent', email)
-            })
+                .then((email) => {
+                    console.log('boop')
+                    this.$emit('emailSent', email)
+                })
+        },
+        close() {
+            this.$emit('close')
         }
-// test(){
-//     console.log(this.email)
-// }
+ 
     },
 
     computed: {

@@ -10,7 +10,7 @@ export default {
     template: `
         <section class="mail main-layout">
             
-            <div v-if="emails" class="flex space-between">
+            <div v-if="emails" class="flex">
                 <mail-filter @newEmail="newEmail" @setFilter="filter" :emails="emails"></mail-filter>
                 <div>
                     <mail-search  class="flex" @filterByRead="filterRead" @search="searchEmails"></mail-search>
@@ -18,14 +18,14 @@ export default {
                     <mail-details @update="updateEmail" v-if="isMailClicked"></mail-details>
                 </div>
             </div>
-            <mail-add @emailSent="emailSent" v-if="isNewEmail"></mail-add>
+            <mail-add @close="newEmailClose" @emailSent="emailSent" v-if="isNewEmail"></mail-add>
         </section>
     `,
     data() {
         return {
             emails: null,
             isNewEmail: false,
-            userEmail: 'momo@momo.com',
+            userEmail: null,
             filterBy: {
                 mailBox: this.$route.params.filterBy,
                 sort: null,
@@ -38,10 +38,14 @@ export default {
         this.unsubscribe = eventBus.on('removeEmail', this.removeEmail)
         mailService.query()
             .then(emails => this.emails = emails)
+        mailService.getUser()
+            .then(user => {
+                this.userEmail = user[0].email
+            })
     },
     computed: {
         displayEmails() {
-            return mailService.filter(this.emails , this.userEmail, this.filterBy)
+            return mailService.filter(this.emails, this.userEmail, this.filterBy)
         },
         isMailClicked() {
             return this.$route.params.mailId
@@ -70,12 +74,15 @@ export default {
             this.$router.replace({ path: `/mail/${this.filterBy.mailBox}` })
             this.filterBy.searchBy = searchBy
         },
-        filterRead(filterBy){
+        filterRead(filterBy) {
             this.filterBy.read = filterBy
         },
-        updateEmail(email){
+        updateEmail(email) {
             const idx = this.emails.findIndex(mail => email.id === mail.id);
             this.emails.splice(idx, 1, email)
+        },
+        newEmailClose() {
+            this.isNewEmail = false
         }
 
     },

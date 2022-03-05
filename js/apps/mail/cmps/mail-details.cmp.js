@@ -1,11 +1,13 @@
 import { mailService } from '../services/mail-service.js'
 export default {
   template: `
-    <section v-if="email">
-        <router-link :to="returnAddress">Back</router-link>
-        <h1>{{email.subject}}</h1>
-        <p><h3>{{email.from.name}}</h3>{{email.from.address}}</p>
-        <p>{{email.body}}</p>
+    <section class="mail-details" v-if="email">
+      <div>
+          <router-link :to="returnAddress"><img src="./img/mail-imgs/arrow.png"/></router-link>
+      </div>
+        <h1 class="mail-subject">{{email.subject}}</h1>
+        <p><span>{{email.from.name}}</span>&lt{{email.from.address}}></p>
+        <pre>{{email.body}}</pre>
     </section>
    ` ,
   data() {

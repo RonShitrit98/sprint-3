@@ -1,0 +1,42 @@
+.mail-details>*:not(:first-child){
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+.mail-details h1{
+   font-family: product-reg; 
+   font-weight: normal;
+   font-size: 1.5rem;
+   margin-bottom: 30px;
+}
+.mail-details p{
+    display: flex;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.mail-details span{
+    font-size: 1rem;
+    /* display: inline-block; */
+    font-weight: bold;
+}
+
+.mail-details pre{
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-family: roboto-reg;
+}
+.mail-details>first-child{
+    width: 75vw;
+    background-color: aquamarine;
+    border-bottom: 1px solid var(--borderclr);
+}
+.mail-details img{
+
+    /* display: block; */
+   margin: 20px; 
+   height: 20px;
+   vertical-align: middle;
+
+}

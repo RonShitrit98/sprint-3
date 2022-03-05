@@ -2,20 +2,28 @@ export default {
     props: ['emails'],
     template: `
         <section class="mail-filter flex direction-column">
-            <div class="filter-logo">Mail</div>
             <button class="new-mail-btn" @click="newEmail">
                 <img src="./img/mail-imgs/plus.png">Compose</button>
             <div class="filter-list">
                 <ul>
-                    <li :class="inboxClass" @click="setFilter('inbox')">Inbox {{unreadEmails}}</li>
-                    <li @click="setFilter('sent')">sent {{unopendSentEmails}}</li>
-                    <li @click="setFilter('star')">Starred</li>
+                    <li :class="inboxClass" @click="setFilter('inbox')">
+                        <img :src="inboxImg"/>
+                        Inbox {{unreadEmails}}</li>
+                    <li :class="sentClass" @click="setFilter('sent')">
+                        <img :src="sentImg"/>
+                        sent {{unopendSentEmails}}</li>
+                    <li :class="starClass" @click="setFilter('star')">
+                        <img :src="starImg"/>Starred</li>
                 </ul>
             </div>
         </section>
 `, data() {
         return {
-            filterBy: 'inbox'
+            filterBy: 'inbox',
+            starImg: './img/mail-imgs/star.png',
+            sentImg: './img/mail-imgs/sent.png',
+            inboxImg: './img/mail-imgs/inbox.png'
+
         }
     },
     methods: {
@@ -40,8 +48,13 @@ export default {
             return sent
         },
         inboxClass(){
-            console.log(this.filterBy)
             if(this.filterBy === 'inbox') return 'marked'
+        },
+        sentClass(){
+            if(this.filterBy === 'sent') return 'marked'
+        },
+        starClass(){
+            if(this.filterBy === 'star') return 'marked'
         }
     }
 }

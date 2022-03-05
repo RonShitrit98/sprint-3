@@ -1,14 +1,14 @@
 export default {
     template: `
     <section class="mail-search">
-        <form @action.prevent>
+        <!-- <form @action.prevent> -->
             <input @input="search" v-model="searchBy" type="text"/>
             <select v-model="filterRead" @change="filterByRead">
                 <option value="all">All</option>
                 <option value="unread">Unread</option>
                 <option value="read">Read</option>
             </select>
-        </form>
+        <!-- </form> -->
     </section>
     `,
 data(){
