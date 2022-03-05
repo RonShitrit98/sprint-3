@@ -1,7 +1,7 @@
 export default {
     props: [''],
     template: `
-    <section class="book-filter">
+    <section class="book-filter books-main-layout">
         <label for="search-by-name">Search:
             <input type="text" v-model="filterBy.name" placeholder="by name">
         </label>

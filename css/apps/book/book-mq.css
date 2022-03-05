@@ -6,7 +6,6 @@
 
   .book-list ul {
     flex-direction: column;
-    /* flex-wrap: wrap; */
   }
 }
 
