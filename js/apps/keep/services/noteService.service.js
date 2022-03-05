@@ -88,7 +88,7 @@ function _creatNotes() {
                     type: 'note-img',
                     isPinned: false,
                     info: {
-                        url: '../../../../img/some-img.jpg',
+                        url: './img/some-img.jpg',
                         title: 'Some image',
                         txt: 'img txt'
                     },

@@ -127,3 +127,7 @@ p {
 textarea {
   resize: none;
 }
+
+.success {
+  background-color: lightgreen;
+}
