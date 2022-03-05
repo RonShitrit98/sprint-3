@@ -48,14 +48,23 @@ export default {
             this.$router.push(`${this.$route.params.filterBy}/${this.email.id}`)
         },
         removeEmail() {
-            // console.log('removing')
             eventBus.emit('removeEmail', this.email.id)
         },
         starEmail() {
+            var txt = 'Mail is starred'
             var isStarred = true
-            if (this.email.isStarred) isStarred = false
+            if (this.email.isStarred){
+                isStarred = false
+                txt = 'Mail is unstarred'
+            } 
             this.email.isStarred = isStarred
             mailService.updateEmail(this.email)
+            .then(()=>{
+                eventBus.emit('show-msg', {type: 'success', txt})
+            })
+            .catch(()=>{
+                eventBus.emit('show-msg', {type: 'erorr', txt: 'Somthing went wrong, please try again'})
+            })
             this.$emit('update', this.email)
         },
         removeHover() {

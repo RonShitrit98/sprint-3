@@ -1,0 +1,15 @@
+.app-footer {
+  height: 8vh;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0px 0px 3px 0px black;
+}
+
+.app-footer p{
+    font-family: sans-serif;
+    font-size: smaller;
+    text-shadow: 0 0 4px #2b2b2b30;
+}
+

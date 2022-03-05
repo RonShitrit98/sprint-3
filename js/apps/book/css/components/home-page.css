@@ -1,0 +1,27 @@
+.home-page {
+    background-image: url("/miss-book/img/home-page.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-attachment: fixed;
+    height: 82vh;
+    width: 100vw;
+    box-shadow: inset 0px 12px 20px 0px #000000a1;
+}
+
+.screen{
+    height: 82vh;
+    width: 100vw;
+    background-color: #80808021;  
+}
+
+.screen h3{
+    font-size: 3.5rem;
+    color: #e8e8e8e3;
+    position: absolute;
+    left: 12%;
+    top: 38%;
+    font-family: sans-serif;
+    text-shadow: 0 0 BLACK0;
+    text-shadow: 0px 0px 15px #000000b3;
+}

@@ -1,0 +1,6 @@
+.book-filter {
+  margin: 15px auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

@@ -65,7 +65,13 @@ export default {
         },
         removeEmail(id) {
             mailService.remove(id)
-                .then(emails => this.emails = emails)
+                .then(emails => {
+                    this.emails = emails
+                    eventBus.emit('show-msg', { type: 'success', txt: 'Mail removed' })
+                })
+                .catch(() => {
+                    eventBus.emit('show-msg', { type: 'erorr', txt: 'Somthing went wrong, please try again' })
+                })
         },
         sortEmails(sortBy) {
             this.filterBy.sortBy = sortBy

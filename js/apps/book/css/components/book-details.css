@@ -1,0 +1,39 @@
+.book-details-container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.book-dets {
+  height: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.book-dets h2 {
+  font-size: 2rem;
+  text-decoration: underline;
+  margin-block-end: 10px;
+}
+
+.book-dets h3 {
+  font-size: 0.8rem;
+  margin-block-end: 10px;
+}
+
+.book-dets h5 {
+  /* font-size: 0.8rem; */
+  margin-block-end: 10px;
+}
+
+.book-dets span {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.show-more-btn {
+  align-self: start;
+  background: #8080801c;
+}
