@@ -1,3 +1,4 @@
+import { eventBus } from '../../../services/eventBus.service.js'
 import { mailService } from '../services/mail-service.js'
 export default {
     props: ['emails'],
@@ -32,8 +33,11 @@ export default {
         sendEmail() {
             mailService.newEmail(this.email)
                 .then((email) => {
-                    console.log('boop')
                     this.$emit('emailSent', email)
+                    eventBus.emit('show-msg', {type: 'success', txt: 'Mail sent'})
+                })
+                .catch(()=>{
+                    eventBus.emit('show-msg', {type: 'erorr', txt: 'Somthing went wrong, please try again'})
                 })
         },
         close() {
