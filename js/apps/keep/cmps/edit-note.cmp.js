@@ -1,7 +1,9 @@
+import {eventBus} from '../../../services/eventBus.service.js';
 import editTxt from './edit-txt.cmp.js';
 import editImg from './edit-img.cmp.js';
 import editVid from './edit-vid.cmp.js';
 import editTodos from './edit-todos.cmp.js';
+import editActions from './edit-actions.cmp.js';
 
 export default {
     props: ['note'],
@@ -13,11 +15,13 @@ export default {
         <edit-vid v-if="isTypeVid" @close="close" :note="note"/>
         <edit-todos v-if="isTypeTodo" @close="close" :note="note"/>
 
-        <div class="edit-actions">
+        <edit-actions :colors="colors" :note="note" @colorPicked="onSetColor"/>
+
+
+        <!-- <div class="edit-actions">
             <button @click="close">
                 <ion-icon name="close-circle-outline"></ion-icon>
             </button>
-
 
             <label @click.stop="colorPicker = !colorPicker" @click.stop="setPos">         
                 <ion-icon name="color-palette-outline"></ion-icon>
@@ -27,7 +31,7 @@ export default {
                 <div class="color" v-for="color in colors" :class="color" 
                 @click="onSetColor(color)"></div>
             </div>
-        </div>
+        </div> -->
     </section>
 
     `,
@@ -35,7 +39,8 @@ export default {
         editTxt,
         editImg,
         editVid,
-        editTodos
+        editTodos,
+        editActions
     },
     data() {
         return {
@@ -44,23 +49,23 @@ export default {
             bgColor: null,
             colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
                 'green', 'yellow', 'orange', 'red', 'none'],
-            colorPicker: false,
-            xPos: null,
-            yPos: null
+            // colorPicker: false,
+            // xPos: null,
+            // yPos: null
         }
     },
     methods: {
         close({ title, txt, note }) {
             if (note) {
                 this.$emit('close', { ...note })
-                this.$emit('screen')
             }
             else {
                 if (title) this.note.info.title = title;
                 if (txt) this.note.info.txt = txt;
                 this.$emit('close', { ...this.note });
-                this.$emit('screen')
             }
+            this.$emit('screen')
+            eventBus.emit('show-msg', { txt: 'Note edited', type: 'success' })
         },
         onSetColor(color) {
             this.note.style = color;

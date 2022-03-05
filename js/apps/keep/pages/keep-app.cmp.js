@@ -1,5 +1,6 @@
 import { utilService } from '../../../services/util.service.js';
 import { noteService } from '../services/noteService.service.js';
+import { eventBus } from '../../../services/eventBus.service.js';
 import noteTxt from '../cmps/note-txt-prev.cmp.js';
 import noteImg from '../cmps/note-img-prev.cmp.js';
 import noteVideo from '../cmps/note-video-prev.cmp.js';
@@ -82,6 +83,8 @@ export default {
             }
             noteService.deleteNote(id)
                 .then(res => this.notes = res)
+
+            eventBus.emit('show-msg', { txt: 'Note deleted', type: 'success' })
         },
         onEdit(id) {
             this.selectedNote = this.notes.find(note => note.id === id);
@@ -119,6 +122,7 @@ export default {
 
                         const idx = this.notes.findIndex(currNote => currNote.id === note.id);
                         this.notes[idx] = note
+                        eventBus.emit('show-msg', { txt: 'Note unpinned', type: 'success' })
                     })
             }
             else {
@@ -129,6 +133,7 @@ export default {
 
                         const idx = this.notes.findIndex(currNote => currNote.id === note.id);
                         this.notes[idx] = note
+                        eventBus.emit('show-msg', { txt: 'Note pinned', type: 'success' })
                     })
             }
         },
