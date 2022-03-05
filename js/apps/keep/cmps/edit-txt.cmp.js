@@ -11,6 +11,10 @@ export default {
         rows="4" cols=""></textarea>
     </div>
 
+
+            <button @click="close">
+                <ion-icon name="close-circle-outline"></ion-icon>
+            </button>
        
         
     </section>

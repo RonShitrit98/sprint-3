@@ -2,7 +2,7 @@ export default {
     props: ['cmp'],
     emits: ['delete', 'edit', 'pin', 'duplicate', 'todoDone', 'screen'],
     template: `
-    <section :class="['note-todos', noteSpan]" @click="onEdit(cmp.id)">
+    <section :class="['note-todos', noteSpan]">
 
         <div class="content-container">
                 <label class="pin" @click.stop="pinTheNote(cmp)">
@@ -14,12 +14,9 @@ export default {
         </div>
 
         <ul>
-            <li v-for="todo in cmp.info.todos" @click.stop >
-                <input type="checkbox" id="todo.id"  @click.stop @change="isDone(todo.id)"
-                v-if="todo.doneAt" checked>
-                <input type="checkbox" id="todo.id"  @click.stop @change="isDone(todo.id)"
-                v-if="!todo.doneAt">
-                <label for="todo.id" :class="{done: todo.doneAt}">{{todo.txt}}</label>
+            <li v-for="todo in cmp.info.todos">
+                <input type="checkbox" :id="todo.id" @change="isDone(todo.id)" :value="todo.doneAt">
+                <label :for="todo.id" :class="{done: todo.doneAt}">{{todo.txt}}</label>
             </li>
         </ul>
 
@@ -27,7 +24,7 @@ export default {
             <label @click.stop="copyNote(cmp)">
                 <ion-icon name="duplicate-outline"></ion-icon>
             </label>
-            <label @click.stop="colorPicker = !colorPicker" @click.stop="setPos">         
+            <label @click.stop="colorPicker = !colorPicker; setPos($event)" >         
                 <ion-icon name="color-palette-outline"></ion-icon>
             </label>
             <label @click.stop="onEdit(cmp.id)">         
@@ -70,6 +67,7 @@ export default {
             this.$emit('duplicate', { ...note })
         },
         isDone(todoId) {
+            console.log(this.cmp.info.todos);
             this.$emit('todoDone', todoId)
         },
         onSetColor(color) {
