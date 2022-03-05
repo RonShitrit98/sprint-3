@@ -11,7 +11,9 @@ import filterNotes from '../cmps/filter-notes.cmp.js';
 
 export default {
     template: `
-    <section class="keep-app keep-main-layout">
+    <section :class="['keep-app', 'keep-main-layout', screenToggel]">
+
+        <div class="main-screen"></div>
 
         <div class="search-container">
             <add-note :notes="notes" @newNote="onAddNote" @adding="isFilter = !isFilter"/>
@@ -22,19 +24,19 @@ export default {
         <section class="pinned-notes" v-if="pinnedNotes.length > 0">
                 <div v-for="note in pinnedNotes">
                     <component :class="['note', note.type]" :is="note.type" :cmp="note" :class="note.style" 
-                    @delete="onDelete" @edit="onEdit" @pin="pinTheNote" @todoDone="markAsDone"></component>
+                    @delete="onDelete" @edit="onEdit" @pin="pinTheNote" @todoDone="markAsDone" @screen="toggelScreen"></component>
                 </div>
         </section>
 
-    <section class="grid-container" v-if="notes">
+    <section class="grid-container" v-if="notes && notes.length > 0">
         <div class="grid">
             <component class="note" v-for="cmp in notesForDisplay" :is="cmp.type" :cmp="cmp" 
             :class="cmp.style" @delete="onDelete" @edit="onEdit" @pin="pinTheNote"
-            @duplicate="duplicateNote" @todoDone="markAsDone" @color="onSetColor"></component>
+            @duplicate="duplicateNote" @todoDone="markAsDone" @color="onSetColor" @screen="toggelScreen"></component>
         </div>
     </section>
 
-    <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor"/>
+    <edit-note v-if="isEdit" :note="selectedNote" @close="closeEdit" @color="onSetColor" @screen="toggelScreen"/>
     
     </section>
 
@@ -46,7 +48,7 @@ export default {
         noteTodos,
         editNote,
         addNote,
-        filterNotes,
+        filterNotes
     },
     data() {
         return {
@@ -56,14 +58,16 @@ export default {
             isFilter: true,
             filterBy: null,
             pinnedNotes: [],
+            isScreen: false
         }
     },
     created() {
-        noteService.query('notes')
+        noteService.query()
             .then(notes => {
                 this.notes = notes.map(note => {
                     if (note.isPinned) {
-                        this.pinnedNotes.push(note)
+                        this.pinnedNotes.push({ ...note })
+                        return note
                     }
                     else return note
                 })
@@ -74,7 +78,7 @@ export default {
             const note = this.notes.find(note => note.id === id);
             if (!note) {
                 const idx = this.pinnedNotes.findIndex(note => note.id === id)
-                this.pinnedNotes.splice(idx,1)
+                this.pinnedNotes.splice(idx, 1)
             }
             noteService.deleteNote(id)
                 .then(res => this.notes = res)
@@ -103,7 +107,6 @@ export default {
             this.notes.unshift(note)
         },
         setFilter(filterBy) {
-            console.log(filterBy);
             this.filterBy = filterBy
         },
         pinTheNote(note) {
@@ -111,18 +114,21 @@ export default {
                 note.isPinned = false;
                 noteService.updateNote(note)
                     .then(note => {
-                        const idx = this.pinnedNotes.findIndex(currNote => currNote.id === note.id)
-                        this.pinnedNotes.splice(idx, 1)
-                        this.notes.unshift(note)
+                        const pinnedIdx = this.pinnedNotes.findIndex(currNote => currNote.id === note.id)
+                        this.pinnedNotes.splice(pinnedIdx, 1)
+
+                        const idx = this.notes.findIndex(currNote => currNote.id === note.id);
+                        this.notes[idx] = note
                     })
             }
             else {
                 note.isPinned = true;
                 noteService.updateNote(note)
                     .then(note => {
-                        const idx = this.notes.findIndex(currNote => currNote.id === note.id)
-                        this.notes.splice(idx, 1)
-                        this.pinnedNotes.unshift(note)
+                        this.pinnedNotes.unshift({ ...note })
+
+                        const idx = this.notes.findIndex(currNote => currNote.id === note.id);
+                        this.notes[idx] = note
                     })
             }
         },
@@ -153,15 +159,25 @@ export default {
                     const idx = this.notes.findIndex(currNote => currNote.id === note.id)
                     this.notes[idx] = note
                 })
+        },
+        toggelScreen() {
+            console.log('yes');
+            this.isScreen = !this.isScreen
         }
     },
     computed: {
         notesForDisplay() {
-            if (!this.filterBy) return this.notes;
+            if (!this.filterBy) {
+                return this.notes.filter(note => !note.isPinned)
+            }
             const regex = new RegExp(this.filterBy, 'i')
             return this.notes.filter(note => {
-                if (note.type === this.filterBy || regex.test(note.info.title)) return note
+                if (!note.isPinned && (note.type === this.filterBy || regex.test(note.info.title))) return note
             })
+        },
+        screenToggel() {
+            if (this.isScreen) return 'show-screen'
+            else return ''
         }
     }
 

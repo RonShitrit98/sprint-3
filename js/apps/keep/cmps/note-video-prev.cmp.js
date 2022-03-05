@@ -1,6 +1,6 @@
 export default {
     props: ['cmp'],
-    emits: ['delete', 'edit', 'pin', 'duplicate'],
+    emits: ['delete', 'edit', 'pin', 'duplicate', 'screen'],
     template: `
     <section class="note-video">
 
@@ -55,6 +55,7 @@ export default {
         },
         onEdit(id) {
             this.$emit('edit', id)
+            this.$emit('screen')
         },
         pinTheNote(note) {
             this.$emit('pin', { ...note })

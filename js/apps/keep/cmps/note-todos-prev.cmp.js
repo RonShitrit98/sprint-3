@@ -1,11 +1,11 @@
 export default {
     props: ['cmp'],
-    emits: ['delete', 'edit', 'pin', 'duplicate', 'todoDone'],
+    emits: ['delete', 'edit', 'pin', 'duplicate', 'todoDone', 'screen'],
     template: `
     <section :class="['note-todos', noteSpan]" @click="onEdit(cmp.id)">
 
-    <div class="content-container">
-                <label class="pin-txt" @click.stop="pinTheNote(cmp)">
+        <div class="content-container">
+                <label class="pin" @click.stop="pinTheNote(cmp)">
                     <img v-if="!cmp.isPinned" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAaFJREFUSA1jZMAD/v//zwuU1gRiYRzK3gLFrzMyMn7GIc/AiEsCaLgRUK4MiEGW4AMgw7uAlpzDpgirBVCXz75z587nhMQUvqfPnvFg0ywtJfVl3txZn9TU1ECOSMXmEyZsGoFioGDhxWc4SB/I4qTkND6QWiAG6cEALBgiEAFwmMNcfv/uLazKFJXVwJZAJbHGEy4fYDWQHMFRCwiG2oAFETdBp2EqwKoHwwfATCYI1Bty8eLFJyAzWFlY/mGaBRGByUHVhkD1oijHsAAom/3r1y+WlNQMcLpubm54hKIDiQOTA6kF6QHpRZIGM1EsALrAFChq2djY9PbN27ecRgZ6b8NCQ+XQNcH4IDmQGpBakB6QXqgZMCWohR1Q0hMokwPKoeQAaI6fAiyTtsP0o/gAJkhNGmtZhK/sAVmOSx6bw9AtuApUNAWLQm2gmCOa+H4gH6QeHVxBFkCxABh2oBSDkWqAcQPSg27BVeSwRjYUmU3zOKC5BShBhOw1NPYHEL+zve0BVFwBSIPFoHzKKWA8hAPxVigOp9xELCZALSHJcADfepPyJOCCLQAAAABJRU5ErkJggg==">
                     <img v-if="cmp.isPinned" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAY9JREFUSA1jZMAD/v//zwuU1gRiYRzK3gLFrzMyMn7GIc/AiEsCaLgRUK4MiEGW4AMgw7uAlpzDpgirBVCXz75z587nhMQUvqfPnvFg0ywtJfVl3txZn9TU1ECOSMXmEyZsGoFioGDhxWc4SB/I4qTkND6QWiAG6cEAuCwAhzkulyObgqQGazzhsgDZDIrYoxYQDL4BCyJugk7DVIBVD4YPgJlMEKg35OLFi08wzcAuAlUbAtWLoggjJwMV1fz69cvA2sae4c3bt5woqnFwRISFvx89cpCBjY3tAjA3tyArQ/EB0HBToKRlY2PTW2INBxkGUgvSA9ILNQMkDAYoPgBKegJFcxSV1aDSpFH3794CaZgC9MV2mE4UH8AEqUmzYDMM6hIMKZjPcMljaAAKoFtwFSg2BYtCbaCYI5r4fiAfpB4dXEEWQLEAGHaPgJIgjAKAcQPio1twFTmsUTQgcWgeBzS3ACWIkHyGzvwAEuhsb3sAlVAA0mAxKJ9yChgP4UC8FYrDKTcRiwlQS0gyHAB3MIqRQdyVIQAAAABJRU5ErkJggg==">
                 </label>        
@@ -61,6 +61,7 @@ export default {
         },
         onEdit(id) {
             this.$emit('edit', id)
+            this.$emit('screen')
         },
         pinTheNote(note) {
             this.$emit('pin', { ...note })
@@ -82,9 +83,11 @@ export default {
     },
     computed: {
         noteSpan() {
-            if (this.cmp.info.todos.length <= 2) return 'span2';
+            if (this.cmp.info.todos.length <= 2) return '';
             else if (this.cmp.info.todos.length > 2 &&
-                this.cmp.info.todos.length <= 5) return 'span3';
+                this.cmp.info.todos.length <= 5) return 'span2';
+            else if (this.cmp.info.todos.length > 5 &&
+                this.cmp.info.todos.length <= 8) return 'span3';
             else return 'span4'
         }
     }

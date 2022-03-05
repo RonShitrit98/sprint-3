@@ -13,10 +13,20 @@ export default {
         <edit-vid v-if="isTypeVid" @close="close" :note="note"/>
         <edit-todos v-if="isTypeTodo" @close="close" :note="note"/>
 
-        <button @click="colorPicker = !colorPicker">color picker</button>
-        <div class="colors-container" v-if="colorPicker">
-            <div class="color-picker" v-for="color in colors" :class="color" 
-            @click="onSetColor(color)"></div>
+        <div class="edit-actions">
+            <button @click="close">
+                <ion-icon name="close-circle-outline"></ion-icon>
+            </button>
+
+
+            <label @click.stop="colorPicker = !colorPicker" @click.stop="setPos">         
+                <ion-icon name="color-palette-outline"></ion-icon>
+            </label>
+
+            <div class="colors-container" v-if="colorPicker" :style="{position: 'absolute', top: yPos/2  + 'px', left: xPos - 350 + 'px'}">
+                <div class="color" v-for="color in colors" :class="color" 
+                @click="onSetColor(color)"></div>
+            </div>
         </div>
     </section>
 
@@ -34,23 +44,31 @@ export default {
             bgColor: null,
             colors: ['grey', 'brown', 'pink', 'purple', 'dark-blue', 'blue', 'turquoise',
                 'green', 'yellow', 'orange', 'red', 'none'],
-            colorPicker: false
+            colorPicker: false,
+            xPos: null,
+            yPos: null
         }
     },
     methods: {
         close({ title, txt, note }) {
-            if (note){
+            if (note) {
                 this.$emit('close', { ...note })
+                this.$emit('screen')
             }
-            else{
+            else {
                 if (title) this.note.info.title = title;
                 if (txt) this.note.info.txt = txt;
                 this.$emit('close', { ...this.note });
+                this.$emit('screen')
             }
         },
         onSetColor(color) {
             this.note.style = color;
             this.$emit('color', { ...this.note });
+        },
+        setPos(ev) {
+            this.xPos = ev.clientX
+            this.yPos = ev.clientY
         }
     },
     computed: {

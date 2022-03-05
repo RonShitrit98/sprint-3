@@ -4,11 +4,14 @@ export default {
     template: `
     <section class="edit-txt">
 
+    <div class="input-sec">
         <input type="text" placeholder="title" v-model="title">
 
-            <textarea type="text" placeholder="note" v-model="txt"></textarea>
+        <textarea type="text" placeholder="note" v-model="txt" 
+        rows="4" cols=""></textarea>
+    </div>
 
-        <button @click="close">Close</button>
+       
         
     </section>
 
