@@ -2,8 +2,9 @@ import keepApp from './apps/keep/pages/keep-app.cmp.js'
 import mailApp from './apps/mail/pages/mail-app.cmp.js'
 import homePage from './pages/home-page.cmp.js'
 import mailDetails from './apps/mail/cmps/mail-details.cmp.js'
-import booksApp from './apps/book/views/books-app.cmp.js'
-import bookDetails from './apps/book/views/book-details.cmp.js'
+import booksApp from './apps/book/pages/books-app.cmp.js'
+import bookDetails from './apps/book/pages/book-details.cmp.js'
+import mailAdd from './apps/mail/cmps/mail-add.cmp.js'
 
 const routes = [
     {
@@ -16,7 +17,18 @@ const routes = [
         children: [{
             path: ':mailId',
             component: mailDetails,
-        }]
+        },
+        {
+            path:':mailId/new/:new',
+            name: 'new',
+            component: mailAdd
+        },  
+         {
+            path:'new/:new',
+            name: 'new',
+            component: mailAdd
+        }
+    ]
     },
     {
         path: '/keep',

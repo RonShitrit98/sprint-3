@@ -44,6 +44,7 @@ function newEmail(email) {
                 body: email.body,
                 isRead: false,
                 isStarred: false,
+                isDraft: email.isDraft,
                 sentAt: Date.now(),
                 to: email.to,
                 from: {
@@ -57,8 +58,9 @@ function newEmail(email) {
 
 function filter(emails, userEmail, filterBy) {
     var filteredEmails = emails
-    if (filterBy.mailBox === 'sent') filteredEmails = emails.filter(email => email.from.address === userEmail)
+    if (filterBy.mailBox === 'sent') filteredEmails = emails.filter(email => email.from.address === userEmail&&!email.isDraft)
     else if (filterBy.mailBox === 'star') filteredEmails = emails.filter(email => email.isStarred)
+    else if(filterBy.mailBox === 'drafts') filteredEmails = emails.filter(email => email.isDraft)
     else filteredEmails = emails.filter(email => email.to === userEmail)
     var displayEmails = filteredEmails
 

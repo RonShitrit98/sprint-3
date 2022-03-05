@@ -45,7 +45,10 @@ export default {
     },
     methods: {
         goToEmail() {
-            this.$router.push(`${this.$route.params.filterBy}/${this.email.id}`)
+            if(this.email.isDraft){
+                eventBus.emit('editDraft', this.email)
+                this.$router.replace({name: `new`, params:{new:'draft'}})
+            }else this.$router.replace(`/mail/${this.$route.params.filterBy}/${this.email.id}/new`)
         },
         removeEmail() {
             eventBus.emit('removeEmail', this.email.id)

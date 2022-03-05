@@ -14,12 +14,14 @@ export default {
                         sent {{unopendSentEmails}}</li>
                     <li :class="starClass" @click="setFilter('star')">
                         <img :src="starImg"/>Starred</li>
+                    <li :class="draftClass" @click="setFilter('drafts')">
+                        <img src="./img/mail-imgs/draft.png"/>drafts</li>
                 </ul>
             </div>
         </section>
 `, data() {
         return {
-            filterBy: 'inbox',
+            filterBy: this.$route.params.filterBy,
             starImg: './img/mail-imgs/star.png',
             sentImg: './img/mail-imgs/sent.png',
             inboxImg: './img/mail-imgs/inbox.png'
@@ -38,12 +40,12 @@ export default {
     },
     computed: {
         unreadEmails() {
-            const read = this.emails.filter(email => !email.isRead && email.to === 'momo@momo.com').length
+            const read = this.emails.filter(email => !email.isRead && email.to === 'momo@momo.com'&&!email.isDraft).length
             if(!read) return
             return read
         },
         unopendSentEmails() {
-            const sent = this.emails.filter(email => !email.isRead && email.from.address === 'momo@momo.com').length
+            const sent = this.emails.filter(email => !email.isRead && email.from.address === 'momo@momo.com'&&!email.isDraft).length
             if(!sent) return
             return sent
         },
@@ -55,6 +57,9 @@ export default {
         },
         starClass(){
             if(this.filterBy === 'star') return 'marked'
+        },
+        draftClass(){
+            if(this.filterBy === 'drafts') return 'marked'
         }
     }
 }

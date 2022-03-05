@@ -24,13 +24,12 @@ export default {
     data() {
         return {
             emails: null,
-            isNewEmail: false,
             userEmail: null,
             filterBy: {
                 mailBox: this.$route.params.filterBy,
                 sort: null,
                 search: null,
-                read: 'all'
+                read: 'all',
             },
         }
     },
@@ -49,11 +48,14 @@ export default {
         },
         isMailClicked() {
             return this.$route.params.mailId
+        },
+        isNewEmail() {
+            return this.$route.params.new
         }
     },
     methods: {
         newEmail() {
-            this.isNewEmail = true
+            this.$router.push({name: `new` ,params:{new: 'new'}})
 
         }, emailSent(email) {
             this.emails.unshift(email)
@@ -87,9 +89,11 @@ export default {
             const idx = this.emails.findIndex(mail => email.id === mail.id);
             this.emails.splice(idx, 1, email)
         },
-        newEmailClose() {
-            this.isNewEmail = false
-        }
+        newEmailClose(email) {
+            this.emails.unshift(email)
+            if(!this.$route.params.emailId) this.$router.replace({ path: `/mail/${this.filterBy.mailBox}` })
+            else this.$route(`/mail/${this.$route.params.filterBy}/${this.$route.params.emailId}`)
+        },
 
     },
     components: {

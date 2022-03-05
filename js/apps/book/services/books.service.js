@@ -18,6 +18,7 @@ export const bookService = {
 };
 
 function _setNextPrevBookId(book) {
+  if(!book) return
   return storageService.query(BOOKS_KEY).then(books => {
     const bookIdx = books.findIndex(currBook => currBook.id === book.id)
     book.nextBookId = (books[bookIdx + 1]) ? books[bookIdx + 1].id : books[0].id
