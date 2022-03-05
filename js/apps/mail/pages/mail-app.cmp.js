@@ -11,20 +11,21 @@ export default {
         <section class="mail main-layout">
             
             <div v-if="emails" class="flex">
-                <mail-filter @newEmail="newEmail" @setFilter="filter" :emails="emails"></mail-filter>
+                <mail-filter :class="openFilterMenu" @newEmail="newEmail" @setFilter="filter" :emails="emails"></mail-filter>
                 <div>
-                    <mail-search  class="flex" @filterByRead="filterRead" @search="searchEmails"></mail-search>
+                    <mail-search @openMenu="openMenu" class="flex" @filterByRead="filterRead" @search="searchEmails"></mail-search>
                     <mail-list v-if="!isMailClicked" @sortEmails="sortEmails" :emails="displayEmails"></mail-list>
                     <mail-details @update="updateEmail" v-if="isMailClicked"></mail-details>
                 </div>
             </div>
-            <mail-add @close="newEmailClose" @emailSent="emailSent" v-if="isNewEmail"></mail-add>
+            <mail-add @emailSent="emailSent" v-show="isNewEmail"></mail-add>
         </section>
     `,
     data() {
         return {
             emails: null,
             userEmail: null,
+            openFilterMenu: null,
             filterBy: {
                 mailBox: this.$route.params.filterBy,
                 sort: null,
@@ -58,8 +59,10 @@ export default {
             this.$router.push({name: `new` ,params:{new: 'new'}})
 
         }, emailSent(email) {
+            // this.emails.unshift(email)
+            if(!this.$route.params.emailId) this.$router.push({ path: `/mail/${this.filterBy.mailBox}` })
+            else this.$route(`/mail/${this.$route.params.filterBy}/${this.$route.params.emailId}`)
             this.emails.unshift(email)
-            this.isNewEmail = false
         },
         filter(filterBy) {
             this.filterBy.mailBox = filterBy
@@ -89,11 +92,10 @@ export default {
             const idx = this.emails.findIndex(mail => email.id === mail.id);
             this.emails.splice(idx, 1, email)
         },
-        newEmailClose(email) {
-            this.emails.unshift(email)
-            if(!this.$route.params.emailId) this.$router.replace({ path: `/mail/${this.filterBy.mailBox}` })
-            else this.$route(`/mail/${this.$route.params.filterBy}/${this.$route.params.emailId}`)
-        },
+        openMenu(){
+            if(this.openFilterMenu) this.openFilterMenu =false
+            else this.openFilterMenu = 'show'
+        }
 
     },
     components: {

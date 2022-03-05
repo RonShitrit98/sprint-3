@@ -10,7 +10,7 @@ export default {
                     <th @click="sortEmails('subject')">Subject</th>
                     <th>Body</th>
                     <th @click="sortEmails('date')">Date</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>  
                     <mail-preview v-for="email in emails" key="email.id" :email="email"/>
         </table>

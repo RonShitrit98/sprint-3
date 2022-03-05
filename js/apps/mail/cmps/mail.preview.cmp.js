@@ -5,7 +5,7 @@ export default {
     props: ['email'],
     template: `
     <!-- <router-link :to="'/mail/'+email.id"> -->
-    <tr v-if="email" @click.stop.prevent="goToEmail" :class="emailClass" >
+    <tr v-if="email" @click="goToEmail" :class="emailClass" >
         <td><label class="stars" @click.stop="starEmail"><img :src="starIcon"></label></td>
         <td>{{email.from.name}}</td>
         <td>{{email.subject}}</td>
@@ -48,7 +48,8 @@ export default {
             if(this.email.isDraft){
                 eventBus.emit('editDraft', this.email)
                 this.$router.replace({name: `new`, params:{new:'draft'}})
-            }else this.$router.replace(`/mail/${this.$route.params.filterBy}/${this.email.id}/new`)
+            }
+            else this.$router.replace(`/mail/${this.$route.params.filterBy}/${this.email.id}`)
         },
         removeEmail() {
             eventBus.emit('removeEmail', this.email.id)

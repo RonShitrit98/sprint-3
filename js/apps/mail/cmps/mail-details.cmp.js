@@ -19,6 +19,7 @@ export default {
     const id = this.$route.params.mailId
     mailService.get(id)
       .then(email => {
+        console.log(email)
         if (!email.isRead) {
           email.isRead = true
           mailService.updateEmail(email)

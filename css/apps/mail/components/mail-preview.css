@@ -21,7 +21,11 @@
 
 .mail-preview td{
     height: 2.5em;
-    padding-right: 1.5px;
+    /* padding-right: 1.5px; */
+    max-width: 10vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;;
 }
 
 .email-read{

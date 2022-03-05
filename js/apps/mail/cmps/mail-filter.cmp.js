@@ -1,9 +1,9 @@
 export default {
     props: ['emails'],
     template: `
-        <section class="mail-filter flex direction-column">
+        <div class="mail-filter flex direction-column">
             <button class="new-mail-btn" @click="newEmail">
-                <img src="./img/mail-imgs/plus.png">Compose</button>
+                <img src="./img/mail-imgs/plus.png"/>Compose</button>
             <div class="filter-list">
                 <ul>
                     <li :class="inboxClass" @click="setFilter('inbox')">
@@ -18,7 +18,7 @@ export default {
                         <img src="./img/mail-imgs/draft.png"/>drafts</li>
                 </ul>
             </div>
-        </section>
+        </div>
 `, data() {
         return {
             filterBy: this.$route.params.filterBy,

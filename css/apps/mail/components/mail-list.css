@@ -1,9 +1,11 @@
 
 .mail-list{
     margin-top: 10px;
+    margin-right: 10px;
 }
 
 .mail-list table{
+    /* width: 100%; */
     width: 80vw;
     border-collapse: collapse;
 }

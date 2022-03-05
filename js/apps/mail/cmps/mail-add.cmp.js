@@ -30,30 +30,44 @@ export default {
         this.unsubscribe = eventBus.on('editDraft', this.editDraft)
     },
     methods: {
-        newEmail() {
-            this.$emit('newEmail')
-        },
         sendEmail() {
             this.email.isDraft = false
             mailService.newEmail(this.email)
-                .then((email) => {
-                    this.$emit('emailSent', email)
-                    eventBus.emit('show-msg', { type: 'success', txt: 'Mail sent' })
-                })
-                .catch(() => {
-                    eventBus.emit('show-msg', { type: 'erorr', txt: 'Somthing went wrong, please try again' })
-                })
+            .then((email) => {
+                this.$emit('emailSent', email)
+                eventBus.emit('show-msg', { type: 'success', txt: 'Mail sent' })
+                console.log(email)
+            })
+            .catch(() => {
+                eventBus.emit('show-msg', { type: 'erorr', txt: 'Somthing went wrong, please try again' })
+            })
+            this.email=  {
+                to: null,
+                subject: null,
+                body: null,
+                id: null,
+                isDraft: true
+            }
         },
         close() {
+            console.log(this.email)
             mailService.newEmail(this.email)
-                .then((email) => {
-                    eventBus.emit('show-msg', { type: 'success', txt: 'Mail seved to drafts' })
-                    this.$emit('close', email)
-                })
+            .then((email) => {
+                eventBus.emit('show-msg', { type: 'success', txt: 'Mail seved to drafts' })
+                this.$emit('emailSent', email)
+            })
+            this.email=  {
+                to: null,
+                subject: null,
+                body: null,
+                id: null,
+                isDraft: true
+            }
         },
         editDraft(email){
+            console.log('edtiting')
             this.email = email
-            console.log(this.email)
+            // this.email.to = email.to
         }
 
     },

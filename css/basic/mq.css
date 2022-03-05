@@ -1,0 +1,41 @@
+@media (max-width: 800px) {
+    .mail-filter{
+        position: fixed;
+        z-index: 3;
+        background-color: rgb(255, 255, 255);
+        height: 100vh;
+        margin: 0px;
+        width: 70vw;
+        max-width: none;
+        box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.22);
+    }
+    .mail-filter{
+        display: none;
+  
+    }
+    .show{
+        display: block;
+    }
+    .mail-list table{
+      width: 90vw;
+    }
+    .filter-menu{
+        display: block;
+    }
+}
+@media (min-width:800px) and (max-width: 1250px) {
+    .mail-filter{
+        max-width: 20vw;
+        /* max-width: 20vw; */
+    }
+    .mail-filter ul{
+       max-width: 20vw;
+    }
+}
+/* @media (max-width: 1250px) {
+    .mail-list table{
+      max-width: 70vw;
+    }
+    .mail-filter{
+        width: 30vw;
+        /* max-width: 20vw; */

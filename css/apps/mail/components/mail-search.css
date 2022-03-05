@@ -16,3 +16,16 @@ border: none;
 margin-left: 20px;
 align-self: center;
 }
+
+.mail-search{
+    width:80vw
+}
+
+.filter-menu{
+    display: none;
+    align-self: center;
+    /* margin-left: 20px; */
+}
+.filter-menu img{
+    width: 20px;
+}
