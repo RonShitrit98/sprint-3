@@ -1,4 +1,5 @@
 import { noteService } from '../services/noteService.service.js';
+import { eventBus } from '../../../services/eventBus.service.js';
 
 export default {
     props: ['notes'],
@@ -91,6 +92,7 @@ export default {
             }
             noteService.save(note)
             this.$emit('newNote', { ...note })
+            eventBus.emit('show-msg', { txt: 'New note added', type: 'success' })
 
             this.title = null;
             this.txt = null;
