@@ -1,0 +1,20 @@
+.home-page {
+  background-image: url("../../img/designs/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 600px;
+}
+
+.home-page div {
+  height: 600px;
+}
+
+.home-page >h2 {
+    z-index: 1;
+    position: absolute;
+    left: 25%;
+    top: 80%;
+    font-size: 2rem;
+    color: #3d3d3dd4;
+    text-shadow: 0 0 2px #000000e8;
+}

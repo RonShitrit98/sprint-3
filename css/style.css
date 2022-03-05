@@ -9,8 +9,8 @@
 @import './basic/layout.css';
 
 /* COMPONENTS */
+@import './components/home-page.css';
 @import './components/app-header.css';
-@import './components/app-footer.css';
 
 
 /* Mail */
